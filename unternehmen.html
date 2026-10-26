@@ -1,0 +1,613 @@
+<!DOCTYPE html><html class="dark" lang="de"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Unternehmen &amp; HR | DailyCheq</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#ddb7ff",
+          "secondary": "#cfbcff",
+          "tertiary": "#c4c1fb",
+          "background": "#000000",
+          "surface": "#000000",
+          "text-dim": "#94A3B8",
+          "text-muted": "#64748B",
+          "success-emerald": "#10B981",
+          "glass-stroke": "rgba(255, 255, 255, 0.12)"
+        },
+        fontFamily: {
+          sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+          display: ["Plus Jakarta Sans", "Inter", "sans-serif"],
+          mono: ["JetBrains Mono", "monospace"]
+        },
+        boxShadow: {
+          'glass-inner': 'inset 0 1px 1px 0 rgba(255, 255, 255, 0.14), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.3)',
+          'apple-card': '0 20px 40px -15px rgba(0,0,0,0.7), inset 0 1px 1px 0 rgba(255,255,255,0.12)',
+          'glow-primary': '0 0 40px -5px rgba(221, 183, 255, 0.25)',
+          'glow-emerald': '0 0 35px -5px rgba(16, 185, 129, 0.25)'
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .fill-icon { font-variation-settings: 'FILL' 1; }
+  
+  /* Apple VisionOS / macOS Sonoma Translucent Glass */
+  .apple-glass {
+    background: rgba(255, 255, 255, 0.035);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.15), 0 20px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  .apple-glass-subtle {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .apple-glass-pill {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .apple-glass-interactive {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .apple-glass-interactive:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(221, 183, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.25), 0 24px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(221, 183, 255, 0.12);
+  }
+
+  /* Custom Slider Styling */
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 0 12px rgba(221, 183, 255, 0.9), 0 2px 4px rgba(0,0,0,0.5);
+    cursor: pointer;
+    border: 2px solid #ddb7ff;
+    transition: transform 0.15s ease;
+  }
+  input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+
+  /* Flow Pulse Animations */
+  @keyframes flow-pulse-purple {
+    0%, 100% { opacity: 0.35; transform: scale(0.98); }
+    50% { opacity: 0.85; transform: scale(1.02); }
+  }
+  .pulse-glow-purple {
+    animation: flow-pulse-purple 4s ease-in-out infinite;
+  }
+
+  @keyframes stream-line {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .flow-track {
+    background: linear-gradient(90deg, rgba(221,183,255,0.05) 0%, rgba(221,183,255,0.7) 50%, rgba(221,183,255,0.05) 100%);
+    background-size: 200% 100%;
+    animation: stream-line 3.5s linear infinite;
+  }
+</style>
+</head>
+<body class="bg-black text-white font-sans antialiased min-h-screen selection:bg-primary/30 selection:text-white flex flex-col relative overflow-x-hidden">
+<!-- Ambient Background Glow (Apple Keynote Obsidian Glow) -->
+<div class="fixed inset-0 pointer-events-none z-0">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[750px] bg-[radial-gradient(ellipse_at_top,_#261942_0%,_#110924_35%,_#000000_75%)] opacity-70"></div>
+<div class="absolute top-[40%] right-[-10%] w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[140px]"></div>
+<div class="absolute bottom-[20%] left-[-10%] w-[500px] h-[500px] bg-secondary/[0.04] rounded-full blur-[140px]"></div>
+</div>
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-black/60 backdrop-blur-2xl border-b border-white/[0.08] transition-all">
+<div class="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+<a class="text-xl font-bold tracking-tight text-white flex items-center gap-1.5 hover:opacity-90 transition-opacity" href="index.html">
+<span class="font-display">DailyCheq</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(221,183,255,0.9)]"></span>
+</a>
+<nav class="hidden md:flex items-center gap-9 text-[13px] tracking-wide font-normal">
+<a class="text-text-dim hover:text-white transition-colors duration-200" href="index.html">Startseite</a>
+<a class="text-text-dim hover:text-white transition-colors duration-200" href="mitarbeitende.html">Mitarbeitende</a>
+<a class="text-white font-medium relative py-1 flex items-center gap-1.5" href="unternehmen.html">
+<span class="">Unternehmen</span>
+<span class="w-1 h-1 rounded-full bg-primary shadow-[0_0_6px_rgba(221,183,255,0.9)]"></span>
+</a>
+<a class="text-text-dim hover:text-white transition-colors duration-200" href="preise.html">Preise</a>
+</nav>
+<div class="flex items-center gap-3">
+<a class="apple-glass-pill hover:bg-white/10 text-white text-xs tracking-wide px-4 py-2 rounded-full transition-all duration-300 font-medium" href="#demo-anfrage">
+        Demo buchen
+      </a>
+</div>
+</div>
+</header>
+<!-- Main Wrapper -->
+<main class="flex-grow flex flex-col relative z-10 w-full max-w-[1240px] mx-auto px-6 md:px-10 pt-32 pb-24">
+<!-- HERO SECTION -->
+<section class="flex flex-col items-center text-center max-w-4xl mx-auto mb-24 md:mb-32">
+<!-- Frosted Badge Pill -->
+<div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full apple-glass-pill text-[11px] font-mono tracking-wider text-text-dim mb-8">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="text-white font-medium">B2B CORPORATE BENEFIT</span>
+<span class="text-white/20">·</span>
+<span class="text-primary font-medium">0% LIQUIDITÄTS-IMPACT</span>
+</div>
+<!-- Main Headline -->
+<h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-[68px] font-extrabold font-display tracking-tight text-white leading-[1.12] mb-6">
+      Mitarbeiter binden.<br class="hidden sm:inline"> Liquidität schonen.<br>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-primary to-secondary">
+        Real-Time EWA für den Mittelstand.
+      </span>
+</h1>
+<!-- Subtitle -->
+<p class="text-base sm:text-lg md:text-xl text-text-dim max-w-2xl font-light leading-relaxed mb-10">
+      Geben Sie Ihren Teams Zugriff auf bereits erarbeitetes Gehalt in Echtzeit — ohne Mehraufwand und mit <strong class="text-white font-medium">0 € Belastung</strong> Ihres Betriebskapitals.
+    </p>
+<!-- CTAs -->
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+<a class="w-full sm:w-auto px-8 py-3.5 rounded-full font-semibold text-sm text-black bg-primary hover:bg-[#ebd3ff] transition-all duration-300 shadow-[0_0_30px_rgba(221,183,255,0.35)] flex items-center justify-center gap-2" href="#demo-anfrage">
+<span class="">Demo anfragen</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+<a class="w-full sm:w-auto px-7 py-3.5 rounded-full font-medium text-sm text-white/90 apple-glass-pill hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2" href="#roi-rechner">
+<span class="material-symbols-outlined text-primary text-base">calculate</span>
+<span class="">ROI berechnen</span>
+</a>
+</div>
+<!-- Trust Mini Bar -->
+<div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-12 text-xs text-text-dim font-mono">
+<span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-success-emerald"></span> MiCA &amp; BaFin Partner</span>
+<span class="text-white/15">•</span>
+<span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> 100% Vorfinanziert</span>
+<span class="text-white/15">•</span>
+<span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> DSGVO Cloud Frankfurt</span>
+</div>
+</section>
+<!-- LIQUIDITÄTS- & VORFINANZIERUNGS-ECOSYSTEM (Core Feature Showcase) -->
+<section class="mb-32">
+<div class="apple-glass rounded-3xl p-6 sm:p-10 md:p-12 relative overflow-hidden">
+<!-- Glow ambient behind glass -->
+<div class="absolute -top-32 -right-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-32 -left-32 w-96 h-96 bg-secondary/10 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Header row of the ecosystem card -->
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between pb-8 border-b border-white/[0.08] gap-4 relative z-10">
+<div>
+<div class="flex items-center gap-2 text-xs font-mono tracking-widest text-primary uppercase mb-1">
+<span class="w-2 h-2 rounded-full bg-success-emerald animate-pulse"></span>
+            Autonomes Treuhand- &amp; Abrechnungs-Ökosystem
+          </div>
+<h2 class="text-2xl sm:text-3xl font-bold font-display text-white tracking-tight">Die Vorfinanzierungs-Architektur</h2>
+</div>
+<div class="inline-flex items-center gap-2 text-xs font-mono text-text-dim apple-glass-subtle px-4 py-2 rounded-full">
+<span class="">Status:</span>
+<span class="text-success-emerald font-medium">100% extern abgesichert</span>
+</div>
+</div>
+<!-- 3 Columns Architecture Rail -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 items-stretch relative z-10">
+  <!-- Box 1: Arbeitgeber & Finanzen -->
+  <div class="rounded-2xl apple-glass-subtle p-8 flex flex-col justify-between apple-glass-interactive border border-white/[0.08]">
+    <div>
+      <div class="flex items-center justify-between mb-5">
+        <span class="text-xs font-mono tracking-wider text-text-dim uppercase">FÜR ARBEITGEBER &amp; FINANZEN</span>
+        <span class="text-[11px] font-mono font-semibold text-success-emerald bg-success-emerald/10 border border-success-emerald/20 px-3 py-1 rounded-full">0 € Belastung</span>
+      </div>
+      <h3 class="text-xl sm:text-2xl font-bold text-white mb-3 font-display">100% geschütztes Betriebskapital</h3>
+      <p class="text-xs sm:text-sm text-text-dim leading-relaxed mb-6 font-light">
+        Ihr Kontoguthaben bleibt bis zum gewohnten Zahltag unberührt. Keine Vorabüberweisungen, kein Cashflow-Abfluss, kein Dispositionsbedarf. Die vollständige Vorfinanzierung erfolgt autonom über BaFin-regulierte Partner.
+      </p>
+      <div class="space-y-3 pt-5 border-t border-white/[0.06] text-xs font-mono">
+        <div class="flex justify-between items-center">
+          <span class="text-text-muted">Vorfinanzierung:</span>
+          <span class="text-white font-medium">100% durch DailyCheq gedeckt</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-text-muted">HR-Aufwand:</span>
+          <span class="text-white font-medium">0 Stunden / Monat</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-text-muted">Schnittstellen:</span>
+          <span class="text-primary font-medium">DATEV · Personio · SAP</span>
+        </div>
+      </div>
+    </div>
+    <div class="mt-8 pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono text-text-dim">
+      <span class="">Cashflow-Impact:</span>
+      <span class="text-success-emerald font-medium">Neutral (0.00 €) · Kein Bilanzpassivum</span>
+    </div>
+  </div>
+
+  <!-- Box 2: Mitarbeitende & Teams -->
+  <div class="rounded-2xl apple-glass-subtle p-8 flex flex-col justify-between apple-glass-interactive border border-white/[0.08]">
+    <div>
+      <div class="flex items-center justify-between mb-5">
+        <span class="text-xs font-mono tracking-wider text-text-dim uppercase">FÜR MITARBEITENDE &amp; TEAMS</span>
+        <span class="text-[11px] font-mono font-semibold text-primary bg-primary/10 border border-primary/20 px-3 py-1 rounded-full">Echtzeit-Zugriff</span>
+      </div>
+      <h3 class="text-xl sm:text-2xl font-bold text-white mb-3 font-display">Sekundengenaue Gehaltsauszahlung</h3>
+      <p class="text-xs sm:text-sm text-text-dim leading-relaxed mb-6 font-light">
+        Mitarbeitende streamen ihr bereits verdientes Gehalt bei Bedarf per App auf ihre Visa Card. Vollständig zins- und gebührenfrei ohne Kreditvertrag oder Schufa-Eintrag – jederzeit transparent und sicher.
+      </p>
+      <div class="space-y-3 pt-5 border-t border-white/[0.06] text-xs font-mono">
+        <div class="flex justify-between items-center">
+          <span class="text-text-muted">Auszahlungsfenster:</span>
+          <span class="text-white font-medium">24/7 in 2 Sekunden (On-Demand)</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-text-muted">Kartenanbindung:</span>
+          <span class="text-secondary font-medium">Apple &amp; Google Pay (Visa)</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-text-muted">Mitarbeiterbindung:</span>
+          <span class="text-success-emerald font-medium">+35% Retention-Effekt</span>
+        </div>
+      </div>
+    </div>
+    <div class="mt-8 pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono text-text-dim">
+      <span class="">Mitarbeiter-Status:</span>
+      <span class="text-primary font-medium">Finanziell entlastet · 0% Zinsen</span>
+    </div>
+  </div>
+</div>
+<!-- Bottom Status Strip -->
+<div class="mt-8 pt-6 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-text-dim"><div class="flex items-center gap-2">
+  <span class="w-1.5 h-1.5 rounded-full bg-success-emerald"></span>
+  <span class="">DATEV LODAS &amp; Lohn/Gehalt 1-Klick-Abgleich</span>
+</div>
+<div class="flex items-center gap-2">
+  <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+  <span class="">BaFin-regulierte Treuhand- &amp; Clearing-Partner</span>
+</div>
+<div class="flex items-center gap-2">
+  <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+  <span class="">Automatischer monatlicher Netto-Ausgleich ohne HR-Aufwand</span>
+</div></div>
+</div>
+</section>
+<!-- 3 SCHLANKE VORTEILS-KACHELN -->
+<section class="mb-32">
+<div class="text-center max-w-xl mx-auto mb-16">
+<span class="text-xs font-mono text-primary uppercase tracking-widest">VORTEILE FÜR UNTERNEHMEN</span>
+<h2 class="text-3xl sm:text-4xl font-bold font-display text-white mt-2 tracking-tight">Entlastung für HR. Sicherheit für Finance.</h2>
+<p class="text-text-dim text-sm mt-3 font-light">Ein Benefit, der sich unmittelbar amortisiert und Ihren administrativen Aufwand eliminiert.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="apple-glass rounded-3xl p-8 flex flex-col justify-between apple-glass-interactive">
+<div>
+<div class="w-12 h-12 rounded-2xl apple-glass-pill flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined text-2xl">account_balance_wallet</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-3 font-display">0% Liquiditätsbelastung</h3>
+<p class="text-sm text-text-dim font-light leading-relaxed">
+            DailyCheq übernimmt die Vorfinanzierung zu 100 %. Ihr Betriebskapital und Kontostand bleiben bis zum regulären Zahltag unangetastet. Der automatische Nettoausgleich erfolgt via Standard-Lohnlauf.
+          </p>
+</div>
+<div class="mt-8 pt-5 border-t border-white/[0.08] flex items-center justify-between text-xs font-mono text-text-dim">
+<span class="">Vorfinanzierungsquote</span>
+<span class="text-primary font-semibold">100% Garantiert</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="apple-glass rounded-3xl p-8 flex flex-col justify-between apple-glass-interactive">
+<div>
+<div class="w-12 h-12 rounded-2xl apple-glass-pill flex items-center justify-center text-secondary mb-6">
+<span class="material-symbols-outlined text-2xl">autorenew</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-3 font-display">0 € Mehraufwand für HR</h3>
+<p class="text-sm text-text-dim font-light leading-relaxed">
+            Keine manuellen Abschlagsanträge, Einzelüberweisungen oder Sonderfreigaben. DailyCheq synchronisiert vollautomatisch mit DATEV, Personio und SAP. Der Lohnexport ist in einer Minute erledigt.
+          </p>
+</div>
+<div class="mt-8 pt-5 border-t border-white/[0.08] flex items-center justify-between text-xs font-mono text-text-dim">
+<span class="">HR-Verwaltungsaufwand</span>
+<span class="text-secondary font-semibold">0 Min. / Monat</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="apple-glass rounded-3xl p-8 flex flex-col justify-between apple-glass-interactive">
+<div>
+<div class="w-12 h-12 rounded-2xl apple-glass-pill flex items-center justify-center text-tertiary mb-6">
+<span class="material-symbols-outlined text-2xl">verified_user</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-3 font-display">Deutsches Recht &amp; DSGVO</h3>
+<p class="text-sm text-text-dim font-light leading-relaxed">
+            Kein Kreditvertrag, keine Zinsen und keine Schufa-Meldung. Mitarbeitende greifen ausschließlich auf bereits geleistete Arbeitsstunden zu. 100% Serverhosting in Frankfurt am Main (ISO 27001).
+          </p>
+</div>
+<div class="mt-8 pt-5 border-t border-white/[0.08] flex items-center justify-between text-xs font-mono text-text-dim">
+<span class="">Rechtlicher Status</span>
+<span class="text-success-emerald font-semibold">Kein Darlehen · MiCA</span>
+</div>
+</div>
+</div>
+</section>
+<!-- WISSENSCHAFTLICH BELEGTE HR-EFFEKTE (Apple Keynote Style) -->
+<section class="mb-32">
+<div class="apple-glass rounded-3xl p-8 sm:p-12 md:p-16 border border-white/[0.12] relative overflow-hidden">
+<!-- Glow effect -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-primary/[0.05] rounded-full blur-[120px] pointer-events-none"></div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 pb-12 border-b border-white/[0.08] relative z-10">
+<div>
+<span class="text-xs font-mono text-primary uppercase tracking-widest">EMPIRISCHE HR-BENCHMARKS</span>
+<h2 class="text-3xl sm:text-4xl font-bold font-display text-white mt-2 tracking-tight">Wissenschaftlich belegte Effekte</h2>
+<p class="text-text-dim text-sm mt-2 max-w-xl font-light">Unabhängige Studien renommierter Institute belegen die messbare Hebelwirkung von Earned Wage Access.</p>
+</div>
+<div class="apple-glass-pill px-4 py-2 rounded-full text-xs font-mono text-text-dim flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">verified</span>
+<span class="">Peer-Reviewed Forschung</span>
+</div>
+</div>
+<!-- 3 Metrics in Apple Keynote Style -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 pt-12 relative z-10">
+<!-- Metric 1 -->
+<div class="space-y-3">
+<div class="text-5xl sm:text-6xl lg:text-7xl font-extrabold font-display tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white via-primary to-purple-300">
+            -35%
+          </div>
+<div class="text-lg font-semibold text-white font-display">Geringere Mitarbeiterfluktuation</div>
+<p class="text-xs sm:text-sm text-text-dim font-light leading-relaxed">
+            Laut Harvard Kennedy School und PwC HR-Benchmarks sinkt die freiwillige Kündigungsquote dramatisch, besonders in produktions- und serviceintensiven Betrieben.
+          </p>
+<div class="text-[11px] font-mono text-text-muted pt-3 border-t border-white/[0.06]">
+            Quelle: Harvard Kennedy School EWA Study &amp; PwC
+          </div>
+</div>
+<!-- Metric 2 -->
+<div class="space-y-3">
+<div class="text-5xl sm:text-6xl lg:text-7xl font-extrabold font-display tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white via-emerald-300 to-success-emerald">
+            2x mehr
+          </div>
+<div class="text-lg font-semibold text-white font-display">Qualifizierte Bewerbungen</div>
+<p class="text-xs sm:text-sm text-text-dim font-light leading-relaxed">
+            Stellenausschreibungen mit flexiblem Gehaltszugang erzielen bis zu doppelt so viele qualifizierte Erstbewerbungen gegenüber rein monatlich zahlenden Mitbewerbern.
+          </p>
+<div class="text-[11px] font-mono text-text-muted pt-3 border-t border-white/[0.06]">
+            Quelle: CEPR Recruiting Studies &amp; HR Tech Institute
+          </div>
+</div>
+<!-- Metric 3 -->
+<div class="space-y-3">
+<div class="text-5xl sm:text-6xl lg:text-7xl font-extrabold font-display tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white via-secondary to-purple-200">
+            78%
+          </div>
+<div class="text-lg font-semibold text-white font-display">Stress-Reduktion / Weniger Ausfall</div>
+<p class="text-xs sm:text-sm text-text-dim font-light leading-relaxed">
+            78 % aller Beschäftigten erfahren messbaren finanziellen Stress vor Monatsende. Der Wegfall unerwarteter Liquiditätsengpässe senkt Absentismus signifikant.
+          </p>
+<div class="text-[11px] font-mono text-text-muted pt-3 border-t border-white/[0.06]">
+            Quelle: Gallup State of the Global Workplace Index
+          </div>
+</div>
+</div>
+</div>
+</section>
+<!-- SCHLANKER ROI-RECHNER WIDGET -->
+<section class="mb-32" id="roi-rechner">
+<div class="apple-glass rounded-3xl p-8 sm:p-12 border border-white/[0.12] relative overflow-hidden">
+<div class="max-w-xl mb-10">
+<span class="text-xs font-mono text-primary uppercase tracking-widest">INTERAKTIVER HR-SIMULATOR</span>
+<h2 class="text-3xl font-bold font-display text-white mt-2 tracking-tight">Berechnen Sie das Einsparpotenzial</h2>
+<p class="text-text-dim text-sm mt-2 font-light">Ermitteln Sie die vermiedenen Fluktuations- und Recruitingkosten für Ihre Unternehmensgröße.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+<!-- Input Section -->
+<div class="lg:col-span-7 space-y-8">
+<div>
+<div class="flex justify-between items-center mb-4">
+<label class="text-sm font-medium text-white" for="team-size-slider">Mitarbeiteranzahl im Team</label>
+<span class="text-lg font-mono font-bold text-primary apple-glass-pill px-4 py-1 rounded-full" id="team-size-display">150 MA</span>
+</div>
+<div class="relative py-2">
+<input class="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer focus:outline-none" id="team-size-slider" max="1000" min="25" step="25" type="range" value="150">
+</div>
+<div class="flex justify-between text-[11px] font-mono text-text-muted mt-2">
+<span class="">25 MA</span>
+<span class="">250 MA</span>
+<span class="">500 MA</span>
+<span class="">1.000+ MA</span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-white/[0.06]">
+<div class="p-5 rounded-2xl apple-glass-subtle">
+<div class="text-xs text-text-dim font-light">Angenommene Fluktuation (ø)</div>
+<div class="text-xl font-bold text-white font-display mt-1">14.2 % p.a.</div>
+<div class="text-[11px] text-text-muted font-mono mt-1">Mittelstands-Benchmark</div>
+</div>
+<div class="p-5 rounded-2xl apple-glass-subtle">
+<div class="text-xs text-text-dim font-light">Wiederbesetzungskosten</div>
+<div class="text-xl font-bold text-white font-display mt-1">~ 8.500 €</div>
+<div class="text-[11px] text-text-muted font-mono mt-1">Recruiting, Onboarding &amp; Ausfall</div>
+</div>
+</div>
+</div>
+<!-- Output KPI Card -->
+<div class="lg:col-span-5 rounded-2xl apple-glass p-8 border border-primary/30 shadow-glow-primary relative flex flex-col justify-between">
+<div>
+<div class="text-xs font-mono text-primary uppercase tracking-widest mb-1">PROGNOSTIZIERTE JAHRESERSPARNIS</div>
+<div class="text-4xl sm:text-5xl font-extrabold font-display text-white my-3 tracking-tight" id="savings-display">45.200 €</div>
+<p class="text-xs text-text-dim leading-relaxed font-light mb-6">
+              Durch die Reduktion vorzeitiger Kündigungen und den signifikant geringeren Nachbesetzungsaufwand in Ihrer Organisation.
+            </p>
+</div>
+<div class="space-y-3 pt-5 border-t border-white/[0.08] text-xs font-mono">
+<div class="flex justify-between items-center">
+<span class="text-text-dim">Vermeidbare Abgänge:</span>
+<span class="text-white font-semibold" id="avoided-quits">~ 5 Fachkräfte / Jahr</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-text-dim">Arbeitgeber-Kosten:</span>
+<span class="text-success-emerald font-semibold">0 € (100% Vorfinanzierung)</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-text-dim">Netto-ROI:</span>
+<span class="text-primary font-semibold">&gt; 800%</span>
+</div>
+</div>
+<a class="w-full mt-6 py-3.5 rounded-full bg-primary hover:bg-[#ebd3ff] text-black font-semibold text-xs tracking-wider uppercase text-center block transition-all duration-300 shadow-[0_0_20px_rgba(221,183,255,0.3)]" href="#demo-anfrage">
+            Vollständige ROI-Analyse anfordern
+          </a>
+</div>
+</div>
+</div>
+</section>
+<!-- INTEGRATIONEN (Minimalistisches Glass-Dock) -->
+<section class="mb-32">
+<div class="text-center max-w-xl mx-auto mb-12">
+<span class="text-xs font-mono text-primary uppercase tracking-widest">HR-ÖKOSYSTEM</span>
+<h2 class="text-3xl font-bold font-display text-white mt-2 tracking-tight">Integrierbar in 15 Minuten.</h2>
+<p class="text-text-dim text-sm mt-2 font-light">Zertifizierte Konnektoren zu den führenden ERP- und Lohnbuchhaltungs-Systemen in Deutschland.</p>
+</div>
+<!-- Minimalist Dock Grid -->
+<div class="apple-glass rounded-3xl p-4 sm:p-6 max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-5 gap-3">
+<!-- DATEV -->
+<div class="apple-glass-subtle rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 text-center apple-glass-interactive">
+<span class="text-base font-bold text-white font-display">DATEV</span>
+<span class="text-[10px] font-mono text-success-emerald bg-success-emerald/10 border border-success-emerald/20 px-2 py-0.5 rounded-full">LODAS / LuG</span>
+</div>
+<!-- Personio -->
+<div class="apple-glass-subtle rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 text-center apple-glass-interactive">
+<span class="text-base font-bold text-white font-display">Personio</span>
+<span class="text-[10px] font-mono text-success-emerald bg-success-emerald/10 border border-success-emerald/20 px-2 py-0.5 rounded-full">API Verifiziert</span>
+</div>
+<!-- SAP -->
+<div class="apple-glass-subtle rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 text-center apple-glass-interactive">
+<span class="text-base font-bold text-white font-display">SAP</span>
+<span class="text-[10px] font-mono text-success-emerald bg-success-emerald/10 border border-success-emerald/20 px-2 py-0.5 rounded-full">SuccessFactors</span>
+</div>
+<!-- Workday -->
+<div class="apple-glass-subtle rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 text-center apple-glass-interactive">
+<span class="text-base font-bold text-white font-display">Workday</span>
+<span class="text-[10px] font-mono text-success-emerald bg-success-emerald/10 border border-success-emerald/20 px-2 py-0.5 rounded-full">Cloud Sync</span>
+</div>
+<!-- Sage -->
+<div class="apple-glass-subtle rounded-2xl p-4 flex flex-col items-center justify-center gap-2.5 text-center apple-glass-interactive col-span-2 sm:col-span-1">
+<span class="text-base font-bold text-white font-display">Sage</span>
+<span class="text-[10px] font-mono text-success-emerald bg-success-emerald/10 border border-success-emerald/20 px-2 py-0.5 rounded-full">Zertifiziert</span>
+</div>
+</div>
+</section>
+<!-- CALL TO ACTION (Floating VisionOS Glass Card) -->
+<section class="mb-16" id="demo-anfrage">
+<div class="apple-glass rounded-3xl p-8 sm:p-12 md:p-16 border border-primary/30 max-w-3xl mx-auto text-center relative overflow-hidden shadow-glow-primary">
+<div class="absolute -top-24 -left-24 w-60 h-60 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+<span class="text-xs font-mono text-primary uppercase tracking-widest">BERATUNG &amp; PILOTPROJEKT</span>
+<h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display text-white mt-3 mb-4 tracking-tight">
+        Jetzt Demo vereinbaren
+      </h2>
+<p class="text-sm sm:text-base text-text-dim max-w-lg mx-auto font-light leading-relaxed mb-8">
+        Erfahren Sie in 20 Minuten, wie Sie DailyCheq risikofrei und ohne IT-Aufwand als Mitarbeiter-Benefit im Unternehmen verankern.
+      </p>
+<form class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto" onsubmit="event.preventDefault(); alert('Vielen Dank! Unser Team setzt sich zeitnah mit Ihnen in Verbindung.');">
+<input class="w-full px-5 py-3.5 rounded-full apple-glass-subtle text-white placeholder-text-muted text-sm focus:outline-none focus:border-primary/60 transition-colors" placeholder="name@unternehmen.de" required="" type="email">
+<button class="w-full sm:w-auto px-7 py-3.5 rounded-full bg-primary hover:bg-[#ebd3ff] text-black font-semibold text-sm whitespace-nowrap transition-all shadow-[0_0_20px_rgba(221,183,255,0.35)]" type="submit">
+          Demo buchen
+        </button>
+</form>
+<div class="flex flex-wrap items-center justify-center gap-6 mt-8 text-xs text-text-dim font-mono">
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm text-success-emerald">check</span> Unverbindlich</span>
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm text-success-emerald">check</span> DSGVO &amp; BaFin Audit</span>
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm text-success-emerald">check</span> 0 € Setup-Gebühr</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Standardisierter DailyCheq Footer -->
+<footer class="w-full bg-black border-t border-white/[0.08] relative z-10">
+<div class="max-w-7xl mx-auto px-6 md:px-10 py-14">
+<div class="flex flex-col md:flex-row justify-between gap-12 mb-12">
+<div class="flex flex-col gap-4 max-w-sm">
+<a class="text-2xl font-bold font-display tracking-tight text-white flex items-center gap-1.5" href="index.html">
+<span class="">DailyCheq</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_rgba(221,183,255,0.8)]"></span>
+</a>
+<p class="text-text-dim text-xs leading-relaxed font-light">
+          Die führende europäische Plattform für autonomes Gehalts- und Benefit-Management. Liquiditätsschonend, fair und transparent.
+        </p>
+<div class="flex items-center gap-2 text-[11px] font-mono text-text-dim pt-2">
+<span class="px-2.5 py-1 rounded-full apple-glass-subtle">ISO 27001 zertifiziert</span>
+<span class="px-2.5 py-1 rounded-full apple-glass-subtle">DSGVO Frankfurt</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-12 md:gap-20 text-xs">
+<div class="flex flex-col gap-3.5">
+<h4 class="text-white font-semibold tracking-wider font-mono uppercase">Produkt</h4>
+<nav class="flex flex-col gap-2.5 text-text-dim font-light">
+<a class="hover:text-white transition-colors" href="mitarbeitende.html">Mitarbeitende</a>
+<a class="text-white font-medium hover:text-white transition-colors" href="unternehmen.html">Für Unternehmen</a>
+<a class="hover:text-white transition-colors" href="preise.html">Preise &amp; Rechner</a>
+<a class="hover:text-white transition-colors" href="#roi-rechner">ROI-Simulator</a>
+</nav>
+</div>
+<div class="flex flex-col gap-3.5">
+<h4 class="text-white font-semibold tracking-wider font-mono uppercase">Rechtliches</h4>
+<nav class="flex flex-col gap-2.5 text-text-dim font-light">
+<a class="hover:text-white transition-colors" href="#">Impressum</a>
+<a class="hover:text-white transition-colors" href="#">Datenschutzerklärung</a>
+<a class="hover:text-white transition-colors" href="#">AGB Unternehmen</a>
+<a class="hover:text-white transition-colors" href="#">Sicherheit &amp; MiCA</a>
+</nav>
+</div>
+<div class="flex flex-col gap-3.5">
+<h4 class="text-white font-semibold tracking-wider font-mono uppercase">Unternehmen</h4>
+<nav class="flex flex-col gap-2.5 text-text-dim font-light">
+<a class="hover:text-white transition-colors" href="#">Über DailyCheq</a>
+<a class="hover:text-white transition-colors" href="#">Karriere</a>
+<a class="hover:text-white transition-colors" href="#">Presse &amp; Medien</a>
+<a class="hover:text-white transition-colors" href="#">Kontakt &amp; Support</a>
+</nav>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-white/[0.08] flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-text-dim font-mono">
+<p class="">© 2024 DailyCheq GbR. Alle Rechte vorbehalten.</p>
+<p class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-success-emerald animate-pulse"></span> Alle Systeme operativ · 99.98% SLA
+      </p>
+</div>
+</div>
+</footer>
+<!-- Interactive ROI Calculator Logic -->
+<script>
+  const slider = document.getElementById('team-size-slider');
+  const teamDisplay = document.getElementById('team-size-display');
+  const savingsDisplay = document.getElementById('savings-display');
+  const avoidedQuitsDisplay = document.getElementById('avoided-quits');
+
+  if (slider && teamDisplay && savingsDisplay && avoidedQuitsDisplay) {
+    slider.addEventListener('input', (e) => {
+      const size = parseInt(e.target.value, 10);
+      teamDisplay.textContent = size + ' MA';
+      // Calculation: size * turnover rate (0.14) * Harvard retention uplift (0.25) * cost per hire (8500)
+      const avoidedQuits = Math.max(1, Math.round(size * 0.14 * 0.25));
+      const savings = avoidedQuits * 8500;
+      avoidedQuitsDisplay.textContent = '~ ' + avoidedQuits + ' Fachkräfte / Jahr';
+      savingsDisplay.textContent = new Intl.NumberFormat('de-DE').format(savings) + ' €';
+    });
+  }
+</script>
+
+
+
+
+</body></html>
