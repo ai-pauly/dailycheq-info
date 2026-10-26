@@ -1,0 +1,1241 @@
+<!DOCTYPE html><html class="dark" lang="de" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Für Mitarbeitende | DailyCheq</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-tertiary-container": "#262354",
+                "surface-container-highest": "#353434",
+                "on-surface": "#e5e2e1",
+                "surface-tint": "#ddb7ff",
+                "on-secondary-fixed-variant": "#5400cc",
+                "primary": "#ddb7ff",
+                "tertiary": "#c4c1fb",
+                "surface-bright": "#3a3939",
+                "primary-container": "#b76dff",
+                "on-background": "#e5e2e1",
+                "on-secondary-container": "#cfbcff",
+                "on-error": "#690005",
+                "outline": "#988d9f",
+                "secondary-fixed-dim": "#cfbcff",
+                "on-surface-variant": "#cfc2d6",
+                "primary-fixed-dim": "#ddb7ff",
+                "surface-variant": "#353434",
+                "on-primary-container": "#400071",
+                "surface-dim": "#141313",
+                "secondary-container": "#6200ea",
+                "inverse-on-surface": "#313030",
+                "tertiary-container": "#8e8bc2",
+                "outline-variant": "#4d4354",
+                "surface-container-lowest": "#0e0e0e",
+                "primary-fixed": "#f0dbff",
+                "on-primary-fixed-variant": "#6900b3",
+                "secondary": "#cfbcff",
+                "on-primary": "#490080",
+                "error-rose": "#F43F5E",
+                "on-tertiary": "#2d2a5b",
+                "text-dim": "#94A3B8",
+                "on-tertiary-fixed": "#181445",
+                "tertiary-fixed-dim": "#c4c1fb",
+                "error": "#ffb4ab",
+                "error-container": "#93000a",
+                "slate-surface": "#0F1115",
+                "on-primary-fixed": "#2c0051",
+                "surface": "#141313",
+                "secondary-fixed": "#e9ddff",
+                "glass-stroke": "rgba(255, 255, 255, 0.08)",
+                "on-secondary": "#3a0092",
+                "inverse-surface": "#e5e2e1",
+                "tertiary-fixed": "#e3dfff",
+                "surface-container-low": "#1c1b1b",
+                "on-error-container": "#ffdad6",
+                "surface-container": "#201f1f",
+                "background": "#141313",
+                "on-secondary-fixed": "#22005d",
+                "surface-container-high": "#2a2a2a",
+                "success-emerald": "#10B981",
+                "inverse-primary": "#842bd2",
+                "on-tertiary-fixed-variant": "#444173"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "stack-md": "16px",
+                "container-padding": "24px",
+                "base": "4px",
+                "stack-lg": "32px",
+                "stack-sm": "8px",
+                "gutter": "16px"
+        },
+        "fontFamily": {
+                "display-xl": ["Plus Jakarta Sans"],
+                "body-sm": ["Inter"],
+                "body-md": ["Inter"],
+                "headline-lg-mobile": ["Plus Jakarta Sans"],
+                "headline-lg": ["Plus Jakarta Sans"],
+                "label-caps": ["JetBrains Mono"],
+                "data-point": ["Inter"]
+        },
+        "fontSize": {
+                "display-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                "data-point": ["20px", {"lineHeight": "28px", "letterSpacing": "0", "fontWeight": "600"}]
+        }
+      },
+    },
+  }
+</script>
+<style>
+    .glass-panel {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .text-gradient-primary {
+        background: linear-gradient(135deg, #ddb7ff 0%, #cfbcff 50%, #8e8bc2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .bg-gradient-primary {
+        background: linear-gradient(135deg, #cfbcff 0%, #b76dff 100%);
+    }
+    
+    .phone-mockup-frame {
+        aspect-ratio: 419 / 882;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+    .phone-mockup-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .btn-premium {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-premium:hover {
+        transform: scale(1.03);
+        box-shadow: 0 0 25px rgba(207, 188, 255, 0.45);
+    }
+    .btn-premium::after {
+        content: '';
+        position: absolute;
+        top: -50%; left: -50%;
+        width: 200%; height: 200%;
+        background: linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.1) 45%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.1) 55%, transparent 100%);
+        transform: rotate(45deg);
+        transition: all 0.6s ease;
+        opacity: 0;
+    }
+    .btn-premium:hover::after {
+        left: 100%;
+        opacity: 1;
+    }
+
+    .nav-link-hover {
+        position: relative;
+    }
+    .nav-link-hover::after {
+        content: '';
+        position: absolute;
+        bottom: -2px; left: 0;
+        width: 0; height: 2px;
+        background: #ddb7ff;
+        transition: width 0.3s ease;
+    }
+    .nav-link-hover:hover::after {
+        width: 100%;
+    }
+    
+    .footer-link-hover:hover {
+        padding-left: 4px;
+        color: #ddb7ff;
+    }
+
+    .particle-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .widget-content {
+        position: relative;
+        z-index: 10;
+    }
+
+    /* Drip Fintech Glowing Cards */
+    .drip-card-glow {
+        box-shadow: 0 0 50px -10px rgba(168, 85, 247, 0.28), 0 0 80px -20px rgba(16, 185, 129, 0.15);
+        border: 1px solid rgba(221, 183, 255, 0.25);
+        background: linear-gradient(180deg, rgba(26, 20, 36, 0.65) 0%, rgba(10, 10, 14, 0.85) 100%);
+        position: relative;
+    }
+    .drip-card-glow::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(135deg, rgba(221, 183, 255, 0.5), rgba(16, 185, 129, 0.3) 40%, rgba(255, 255, 255, 0.05) 100%);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+    }
+
+    /* Pulse Glow Keyframes */
+    @keyframes glowPulse {
+        0%, 100% {
+            box-shadow: 0 0 8px #10B981, 0 0 16px rgba(16, 185, 129, 0.4);
+        }
+        50% {
+            box-shadow: 0 0 16px #10B981, 0 0 32px rgba(16, 185, 129, 0.8);
+        }
+    }
+    .animate-glow-dot {
+        animation: glowPulse 2s infinite ease-in-out;
+    }
+
+    .pill-active {
+        background: rgba(221, 183, 255, 0.18);
+        color: #ddb7ff;
+        border-color: rgba(221, 183, 255, 0.45);
+        box-shadow: 0 0 12px rgba(221, 183, 255, 0.25);
+    }
+
+    .sankey-tag-glow {
+        filter: drop-shadow(0 0 8px currentColor);
+    }
+</style>
+</head>
+<body class="text-on-surface font-body-md antialiased min-h-screen flex flex-col relative overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container bg-black" style="background-color: rgb(0, 0, 0);">
+<header class="fixed top-0 left-0 w-full z-50 bg-black/40 backdrop-blur-xl border-b border-white/[0.06] transition-all">
+<div class="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
+<a class="text-xl font-bold tracking-tight text-white flex items-center gap-1.5 group" href="{{DATA:SCREEN:SCREEN_3}}">
+<span class="">DailyCheq</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#ddb7ff] group-hover:scale-125 transition-transform"></span>
+</a>
+<nav class="hidden md:flex items-center gap-8 text-[13px] tracking-wide">
+<a class="text-text-dim hover:text-white transition-colors duration-200" href="{{DATA:SCREEN:SCREEN_3}}">Startseite</a>
+<a class="text-white font-medium relative flex items-center gap-1 drop-shadow-[0_0_12px_rgba(221,183,255,0.4)]" href="{{DATA:SCREEN:SCREEN_17}}">
+<span class="">Mitarbeitende</span>
+<span class="inline-block w-1 h-1 rounded-full bg-primary"></span>
+</a>
+<a class="text-text-dim hover:text-white transition-colors duration-200" href="{{DATA:SCREEN:SCREEN_71}}">Unternehmen</a>
+<a class="text-text-dim hover:text-white transition-colors duration-200" href="{{DATA:SCREEN:SCREEN_6}}">Preise</a>
+</nav>
+<div class="flex items-center gap-4">
+<a class="border border-white/20 hover:border-primary/60 bg-white/[0.03] hover:bg-primary/20 text-white text-xs tracking-wider uppercase px-4 py-2 rounded-full transition-all duration-300 font-label-caps" href="#demo">
+        Demo buchen
+      </a>
+</div>
+</div>
+</header>
+<main class="flex-grow pt-[100px] z-10 relative px-gutter max-w-[1440px] mx-auto w-full pb-32 space-y-16 md:space-y-24">
+<!-- Hero Section -->
+<section class="flex flex-col items-center gap-16 pt-12 md:pt-24 pb-12 relative">
+<!-- Hero Flowing Particles Background -->
+<canvas class="particle-canvas opacity-75" height="481" id="hero-flow-canvas" width="1248"></canvas>
+<div class="w-full max-w-4xl space-y-stack-md text-center relative z-10">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container border border-white/10 hover:border-primary/50 transition-colors cursor-default">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-caps text-label-caps text-primary uppercase">Echtzeit-Gehalt</span>
+</div>
+<h1 class="font-display-xl text-display-xl text-on-surface tracking-tight leading-tight">
+                Dein Gehalt, so <br class="hidden md:block">
+<span class="text-gradient-primary">flexibel wie dein Leben.</span>
+</h1>
+<p class="font-body-md text-body-md text-text-dim max-w-xl mx-auto">
+                Hör auf, 30 Tage auf dein Geld zu warten. DailyCheq streamt deinen Lohn in Echtzeit direkt auf deine App. Volle finanzielle Freiheit, ab der ersten Sekunde.
+            </p>
+<div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
+<button class="btn-premium bg-gradient-primary text-on-primary font-body-md text-body-md font-semibold px-8 py-3.5 rounded-full active:scale-95">
+                    Warteliste beitreten
+                </button>
+<button class="glass-panel text-on-surface font-body-md text-body-md font-semibold px-8 py-3.5 rounded-full hover:bg-white/10 transition-all active:scale-95 duration-150 flex items-center justify-center gap-2 group">
+                    Mehr erfahren <span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- The Live Stream Experience with Interactive Sankey Money Stream Flow -->
+<section class="flex flex-col items-center gap-12 relative pt-24 pb-0">
+<div class="absolute inset-0 -z-10" style="background-color: rgb(0, 0, 0);"></div>
+<!-- Ambient Background Drip Flow Glow -->
+<div class="absolute w-[600px] h-[350px] bg-primary/15 rounded-full blur-[140px] pointer-events-none -top-10 left-1/2 -translate-x-1/2 -z-10"></div>
+<div class="absolute w-[450px] h-[250px] bg-success-emerald/10 rounded-full blur-[120px] pointer-events-none top-40 right-10 -z-10"></div>
+<div class="text-center space-y-6 max-w-3xl mx-auto mb-4">
+<h2 class="font-display-xl text-3xl md:text-5xl text-on-surface tracking-tight">Sieh dein Geld <span class="text-gradient-primary">wachsen</span></h2>
+<p class="font-body-md text-text-dim leading-relaxed">Jede Sekunde, die du arbeitest, spiegelt sich in deiner App wider. Dein persönliches Command Center für Echtzeit-Verdienst.</p>
+</div>
+<!-- Main Money Stream Sankey Command Card -->
+<div class="w-full max-w-5xl mx-auto relative">
+<canvas class="particle-canvas absolute inset-0 -z-0 opacity-85 pointer-events-none" height="1086" id="ambient-dashboard-canvas" width="1024"></canvas>
+<!-- Outer Glowing Shell Frame -->
+<div class="drip-card-glow rounded-[2.5rem] p-6 md:p-10 relative overflow-hidden backdrop-blur-2xl">
+<div class="widget-content space-y-8">
+<!-- Header Controls with Analysis Title, Live Indicator & Filter Pills -->
+<div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6">
+<div class="flex items-center gap-4">
+<div class="inline-flex items-center gap-2.5 bg-black/70 px-4 py-2 rounded-full border border-success-emerald/30 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+<span class="w-2.5 h-2.5 rounded-full bg-success-emerald animate-glow-dot"></span>
+<span class="font-label-caps text-[11px] text-white tracking-[0.2em] uppercase font-bold">MONEY STREAM ANALYSIS</span>
+</div>
+<span class="hidden sm:inline-block text-xs font-label-caps text-text-dim/80 uppercase tracking-widest">• ECHTZEIT-SPLIT</span>
+</div>
+</div>
+<!-- Realtime Counter Highlight -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-6 bg-black/40 border border-white/5 rounded-2xl px-6 py-5">
+<div class="text-center md:text-left">
+<p class="font-label-caps text-text-dim text-xs uppercase tracking-[0.2em] flex items-center gap-2 justify-center md:justify-start">
+    Sofort verfügbarer Lohn
+    <span class="inline-block w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+</p>
+<div class="flex items-baseline gap-2 text-white justify-center md:justify-start">
+<span class="font-display-xl text-4xl md:text-6xl tracking-tight text-primary">€</span>
+<span class="font-display-xl text-4xl md:text-6xl tracking-tighter tabular-nums drop-shadow-[0_4px_25px_rgba(221,183,255,0.35)]" id="live-money-counter">130,623878</span>
+</div>
+</div>
+<!-- Daily Flow Badges matching App screenshot -->
+<div class="flex flex-wrap items-center justify-center gap-3">
+<div class="flow-pill bg-black/60 border border-error/30 hover:border-error/60 transition-all rounded-xl px-4 py-2.5 flex items-center gap-3 shadow-lg">
+<span class="w-2.5 h-2.5 rounded-full bg-error-rose shadow-[0_0_8px_#ef4444]"></span>
+<div class="text-left">
+<span class="block text-[10px] font-label-caps tracking-widest text-text-dim uppercase">FIX</span>
+<span class="font-label-caps text-xs md:text-sm font-semibold text-white">21.97 €<span class="text-text-dim text-[10px]">/Tag</span></span>
+</div>
+</div>
+<div class="flow-pill bg-black/60 border border-primary/30 hover:border-primary/60 transition-all rounded-xl px-4 py-2.5 flex items-center gap-3 shadow-lg">
+<span class="w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_8px_#ddb7ff]"></span>
+<div class="text-left">
+<span class="block text-[10px] font-label-caps tracking-widest text-text-dim uppercase">VAULT</span>
+<span class="font-label-caps text-xs md:text-sm font-semibold text-white">13.41 €<span class="text-text-dim text-[10px]">/Tag</span></span>
+</div>
+</div>
+<div class="flow-pill bg-black/60 border border-success-emerald/30 hover:border-success-emerald/60 transition-all rounded-xl px-4 py-2.5 flex items-center gap-3 shadow-lg">
+<span class="w-2.5 h-2.5 rounded-full bg-success-emerald shadow-[0_0_8px_#10B981]"></span>
+<div class="text-left">
+<span class="block text-[10px] font-label-caps tracking-widest text-text-dim uppercase">FREE</span>
+<span class="font-label-caps text-xs md:text-sm font-semibold text-white">47.95 €<span class="text-text-dim text-[10px]">/Tag</span></span>
+</div>
+</div>
+</div>
+</div>
+<!-- The Interactive Animated Sankey Stream Canvas Container -->
+<div class="relative w-full rounded-2xl bg-black/80 border border-white/10 p-2 sm:p-4 overflow-hidden shadow-inner">
+<!-- Subtle radial ambient glow inside Sankey canvas box -->
+<div class="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/10 rounded-full blur-[80px] pointer-events-none"></div>
+<div class="absolute bottom-1/4 right-1/4 w-72 h-72 bg-success-emerald/10 rounded-full blur-[80px] pointer-events-none"></div>
+<div class="relative w-full h-[460px] sm:h-[500px]">
+<canvas class="w-full h-full block rounded-xl cursor-crosshair" height="500" id="sankey-stream-canvas" width="908"></canvas>
+<!-- Interactive Overlay Labels overlaying the animated Sankey -->
+<div class="pointer-events-none absolute inset-0 select-none">
+<!-- Left Source Node -->
+<div class="absolute left-3 sm:left-6 top-[50%] -translate-y-1/2 flex items-center gap-2">
+<span class="px-2.5 py-1 rounded bg-white/10 text-white font-label-caps text-[11px] tracking-widest font-semibold border border-white/20 backdrop-blur-md shadow-lg">LOHN-STREAM</span>
+</div>
+<!-- Sub-Label Badges anchored across right branches -->
+<div class="hidden sm:flex absolute right-4 top-8 flex-col items-end gap-1">
+<span class="font-label-caps text-[10px] text-error-rose uppercase tracking-widest font-bold">Fixkosten-Split</span>
+<span class="text-[11px] text-text-dim font-body-sm">Miete • Strom • Internet • Abos</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Lower Detailed Metrics Bar -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2"><!-- Card 1: Fixkosten -->
+<div class="glass-panel rounded-2xl p-6 border-error-rose/20 hover:border-error-rose/40 transition-colors flex flex-col justify-between space-y-4">
+<div class="flex items-center justify-between gap-2">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-error-rose/10 flex items-center justify-center text-error-rose">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+</div>
+<span class="font-label-caps text-xs text-text-dim uppercase tracking-wider font-semibold">Fixkosten</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-success-emerald/10 border border-success-emerald/20 text-success-emerald text-[11px] font-label-caps font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-success-emerald shadow-[0_0_8px_#10B981]"></span>
+      100% Gesichert
+    </div>
+</div>
+<div class="space-y-1">
+<div class="font-display-xl text-3xl font-bold text-white tracking-tight tabular-nums">
+      21,97 € <span class="text-lg font-normal text-text-dim">/ Tag</span>
+</div>
+<p class="font-body-sm text-xs text-text-dim leading-relaxed">Automatisch gedeckt für Miete, Verträge &amp; Abos</p>
+</div>
+</div>
+<!-- Card 2: The Vault -->
+<div class="glass-panel rounded-2xl p-6 border-primary/20 hover:border-primary/40 transition-colors flex flex-col justify-between space-y-4">
+<div class="flex items-center justify-between gap-2">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">savings</span>
+</div>
+<span class="font-label-caps text-xs text-text-dim uppercase tracking-wider font-semibold">The Vault</span>
+</div>
+<div class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[11px] font-label-caps font-semibold tabular-nums">
+      +13,41 € / Tag
+    </div>
+</div>
+<div class="space-y-1">
+<div class="font-display-xl text-3xl font-bold text-white tracking-tight tabular-nums drop-shadow-[0_0_12px_rgba(221,183,255,0.4)]" id="vault-money-counter" style="white-space: nowrap;">€ 450,082929</div>
+<p class="font-body-sm text-xs text-text-dim leading-relaxed">Automatischer Vermögensaufbau &amp; Rücklage</p>
+</div>
+</div>
+<!-- Card 3: Freies Guthaben -->
+<div class="glass-panel rounded-2xl p-6 border-success-emerald/20 hover:border-success-emerald/40 transition-colors flex flex-col justify-between space-y-4">
+<div class="flex items-center justify-between gap-2">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-success-emerald/10 flex items-center justify-center text-success-emerald">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+</div>
+<span class="font-label-caps text-xs text-text-dim uppercase tracking-wider font-semibold">Freies Guthaben</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-success-emerald/10 border border-success-emerald/20 text-success-emerald text-[11px] font-label-caps font-semibold shadow-[0_0_8px_rgba(16,185,129,0.2)]">
+<span class="w-1.5 h-1.5 rounded-full bg-success-emerald animate-pulse"></span>
+      Sofort nutzbar
+    </div>
+</div>
+<div class="space-y-1">
+<div class="font-display-xl text-3xl font-bold text-success-emerald tracking-tight tabular-nums drop-shadow-[0_0_12px_rgba(16,185,129,0.25)]">
+      47,95 € <span class="text-lg font-normal text-text-dim">/ Tag</span>
+</div>
+<p class="font-body-sm text-xs text-text-dim leading-relaxed">Täglich frei verfügbar auf deiner DailyCheq Card</p>
+</div>
+</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- App Features Carousel Section -->
+<section class="w-full relative max-w-[1200px] mx-auto pt-12 pb-32" id="app-carousel" style="background-color: rgb(0, 0, 0);">
+<div class="text-center mb-16 space-y-4 px-4">
+<h2 class="font-display-xl text-3xl md:text-5xl text-on-surface tracking-tight">Deine App im <span class="text-gradient-primary">Überblick</span></h2>
+<p class="font-body-md text-text-dim text-lg max-w-2xl mx-auto">Alle Tools, die du für die volle Kontrolle über dein Gehalt brauchst.</p>
+</div>
+<div class="relative w-full flex items-center justify-center px-4 md:px-20">
+<button class="hidden md:flex absolute z-20 items-center justify-center rounded-full bg-surface-container border border-white/10 hover:border-primary/50 text-on-surface transition-all hover:scale-105 active:scale-95 shadow-lg w-14 h-14" id="carousel-prev" style="left: calc(50% - 272px);">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="carousel-track-wrapper w-full relative max-w-xl" style="background-color: #000000;">
+<div class="flex transition-transform duration-500 ease-out" id="carousel-track" style="transform: translateX(-100%);">
+<div class="w-full flex-shrink-0 flex flex-col items-center gap-8 pb-12" style="background-color: rgb(0, 0, 0);">
+<div class="phone-mockup-frame relative transform py-8" style="aspect-ratio: 419 / 882; width: 100%; max-width: 400px; margin: 0px auto;">
+<img alt="Echtzeit-Wallet" class="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOsXJHlmKC7W95N947BHVhYFau0B5tI34v2CI0KgYItfeinFU9OIx2WxkS4BuexvbZT0ydANhnGeCcro5rLWkWHb2u0AgXaHdzwr09RNFslX0kFBd7gkJ4IOI25eO8ebm0tvGT1XmvbULrFZ7a28st6E_s4fPcvPvbGX6fWKc5oKV1ER2Btru-1lV4Z3D4afbE9K503P4cFxf7uKe7NiF9B2Emw6IBfAeak6z-_bZLEvL2PXTj_1l3rUW4huJQ3ymqLqtYdjB2IIH8">
+</div>
+<div class="text-center space-y-2 mt-4 md:mt-12">
+<h3 class="font-display-xl text-2xl text-on-surface tracking-tight">Echtzeit-Wallet</h3>
+<p class="font-body-sm text-text-dim">Dein Lohn, Sekunde für Sekunde verfügbar.</p>
+</div>
+</div>
+<div class="w-full flex-shrink-0 flex flex-col items-center gap-8 pb-12" style="background-color: rgb(0, 0, 0);">
+<div class="phone-mockup-frame relative transform py-8" style="aspect-ratio: 419 / 882; width: 100%; max-width: 400px; margin: 0px auto;">
+<img alt="Deine DailyCheq Card" class="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcsuC3CCAav2LSYqaMAzlLab6Qo6LDMBO5U45bt7ItQPYC2osPU1iTFSxkGNLjhRn14iDjedgJ8zolm2x76GRjkhVOlvE1_7k6McYXiQcmSNiyUqPJ4tUf6TO5o7TERwAmoKQlk6TUFYEKMmraMvQsjr1wXi9iNvAP_gXno069duV7kEOTdqvoDBnNCZMM4HoxpS4oHHXoLnVPL71z_yVe9cMOaEEy5BANCFRat6an7SBoh6LDbgWnuB1Uh13kYICrz7R8_Tq24LuG">
+</div>
+<div class="text-center space-y-2 mt-4 md:mt-12">
+<h3 class="font-display-xl text-2xl text-on-surface tracking-tight">Deine DailyCheq Card</h3>
+<p class="font-body-sm text-text-dim">Flexible Limits und sofortiges Sperren.</p>
+</div>
+</div>
+<div class="w-full flex-shrink-0 flex flex-col items-center gap-8 pb-12" style="background-color: rgb(0, 0, 0);">
+<div class="phone-mockup-frame relative transform py-8" style="aspect-ratio: 419 / 882; width: 100%; max-width: 400px; margin: 0px auto;">
+<img alt="Finanz-Analyse" class="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKKste7zQdqNq_MzLqqFS_ZirXZFeV96Rh_QmpthbhK3sjFa_auwCwE33u2e9pTMBAmKDj4b9z3b9KgjBUQRMGt1HoTUkamdMg-OtQd5Woxt5jFpn84RcW9YSPZuANxVLPD2BKx8DSImOpEAE68kHQmz4XgLyUmifZ4csW38Fk-go2bkwVsBcHh8uNVm47nak2Dk241SrOrqJdFSFN-g_cqNjM3hDXbBOZAippkDjomqcMG15l5nZsnWylzxzrJXjzYEKPzPOk-bir">
+</div>
+<div class="text-center space-y-2 mt-4 md:mt-12">
+<h3 class="font-display-xl text-2xl text-on-surface tracking-tight">Finanz-Analyse</h3>
+<p class="font-body-sm text-text-dim">Verstehe und optimiere deine Geldflüsse.</p>
+</div>
+</div>
+</div>
+</div>
+<button class="hidden md:flex absolute z-20 items-center justify-center rounded-full bg-surface-container border border-white/10 hover:border-primary/50 text-on-surface transition-all hover:scale-105 active:scale-95 shadow-lg w-14 h-14" id="carousel-next" style="right: calc(50% - 272px);">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<div class="flex justify-center gap-3 mt-12 md:mt-8">
+<button aria-label="Slide 1" class="carousel-dot w-3 h-3 rounded-full transition-all duration-300 bg-white/20 hover:bg-white/40" data-index="0"></button>
+<button aria-label="Slide 2" class="carousel-dot w-3 h-3 rounded-full transition-all duration-300 bg-primary shadow-[0_0_8px_rgba(221,183,255,0.6)]" data-index="1"></button>
+<button aria-label="Slide 3" class="carousel-dot w-3 h-3 rounded-full transition-all duration-300 bg-white/20 hover:bg-white/40" data-index="2"></button>
+</div>
+<div class="md:hidden flex justify-center items-center gap-2 mt-6 text-text-dim/60">
+<span class="material-symbols-outlined text-[16px]">swipe</span>
+<span class="font-body-sm text-xs uppercase tracking-wider">Wischen zum Entdecken</span>
+</div>
+</section>
+<!-- Enhanced Form Section -->
+<section class="w-full max-w-6xl mx-auto py-12 md:py-20 relative px-4">
+<div class="absolute w-[500px] h-[300px] bg-primary/15 rounded-full blur-[140px] pointer-events-none -top-10 left-1/2 -translate-x-1/2 -z-10"></div>
+<div class="glass-panel drip-card-glow rounded-[2.5rem] p-8 md:p-14 relative overflow-hidden backdrop-blur-2xl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+<div class="lg:col-span-6 space-y-8">
+<div class="space-y-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-primary/30 shadow-[0_0_12px_rgba(221,183,255,0.25)]">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-widest font-semibold">APPLE &amp; GOOGLE PAY READY</span>
+</div>
+<h2 class="font-display-xl text-3xl md:text-5xl text-on-surface tracking-tight leading-tight">
+            Dein Gehalt. <br class="hidden sm:block">
+<span class="text-gradient-primary">Direkt auf deiner Karte.</span>
+</h2>
+<p class="font-body-md text-text-dim leading-relaxed">
+            Kein Warten auf Überweisungen: Dein täglich erarbeitetes Guthaben ist sofort auf deiner DailyCheq Card verfügbar. Nahtlos integriert in Apple Pay und Google Pay für bargeldloses, weltweites Bezahlen in Echtzeit – ohne Dispo, ohne Bonitätsprüfung und ohne Schulden.
+          </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-primary/40 transition-colors space-y-2">
+<div class="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">contactless</span>
+</div>
+<h4 class="font-display-xl text-base font-semibold text-white tracking-tight">Apple Pay &amp; Google Pay</h4>
+<p class="font-body-sm text-xs text-text-dim leading-relaxed">Mit einem Fingertipp in Wallet aktivieren und sekundengenau mit deinem erarbeiteten Lohn kontaktlos bezahlen.</p>
+</div>
+<div class="p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-primary/40 transition-colors space-y-2">
+<div class="w-9 h-9 rounded-xl bg-success-emerald/10 flex items-center justify-center text-success-emerald">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+</div>
+<h4 class="font-display-xl text-base font-semibold text-white tracking-tight">Echtzeit-Verfügbarkeit</h4>
+<p class="font-body-sm text-xs text-text-dim leading-relaxed">Jeder erarbeitete Euro steht unmittelbar und gebührenfrei für Kartenzahlungen zur Verfügung.</p>
+</div>
+<div class="p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-primary/40 transition-colors space-y-2">
+<div class="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">lock_reset</span>
+</div>
+<h4 class="font-display-xl text-base font-semibold text-white tracking-tight">Sicherheit &amp; In-App Control</h4>
+<p class="font-body-sm text-xs text-text-dim leading-relaxed">Sofortiges Sperren/Entsperren per Klick, dynamische Ausgabenlimits und weltweiter Visa-Käuferschutz.</p>
+</div>
+<div class="p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-primary/40 transition-colors space-y-2">
+<div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[20px]">credit_card</span>
+</div>
+<h4 class="font-display-xl text-base font-semibold text-white tracking-tight">Physisch &amp; Virtuell</h4>
+<p class="font-body-sm text-xs text-text-dim leading-relaxed">Erhältlich als nachhaltige physische Karte oder sofort einsatzbereite virtuelle Visa-Debitkarte.</p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-6 flex flex-col items-center justify-center relative">
+<div class="absolute w-72 h-72 bg-primary/20 rounded-full blur-[80px] pointer-events-none"></div>
+<div class="relative w-full max-w-lg transition-transform duration-500 hover:scale-[1.02] drop-shadow-[0_20px_40px_rgba(183,109,255,0.22)]">
+<img alt="DailyCheq Visa Card" class="w-full h-auto rounded-3xl object-contain border border-white/10 shadow-2xl relative z-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVMQMi0fASyCVgkfOyvhxe-H_dSPHD_a_UFOiUBB22J7QmtV5oc3t8jUwHHf99l_phUSnLfIV_06Ckr7HmrPsHQzKXveINbJ5V6EjGVwE6ZRj39-c0xNxgv0Wepq7yRpaggXFmMV6Id3i6g7IT9hXpJNywoVRMUt7A5AANdbA4X29tbvQuT5ReXSTKGQUbGC7k-uy6s5Dk61w3F5Ap4UXNVgVLDWfr4b_Bz5KxrvlayHIdd4dg_zqOj0UmFQo-QAJPWy8">
+</div>
+</div>
+</div>
+</div>
+</section><section class="w-full max-w-5xl mx-auto py-24 space-y-16">
+<div class="text-center space-y-4 px-4">
+<h2 class="font-display-xl text-3xl md:text-5xl text-on-surface tracking-tight">
+      Kein Kredit. <span class="text-gradient-primary">Dein Geld.</span>
+</h2>
+<p class="font-body-md text-text-dim text-lg max-w-2xl mx-auto">
+      DailyCheq ist kein Kredit. Du greifst lediglich auf das Geld zu, das du bereits erarbeitet hast. Keine Zinsen, keine Schuldenfallen, kein Schufa-Eintrag.
+    </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
+<!-- Classic Loan Card -->
+<div class="glass-panel rounded-[2rem] p-8 border-white/5 opacity-80">
+<div class="space-y-6">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-error-rose text-3xl">sentiment_dissatisfied</span>
+<h3 class="font-display-xl text-xl text-on-surface">Klassischer Kredit</h3>
+</div>
+<ul class="space-y-4">
+<li class="flex items-center gap-3 text-text-dim">
+<span class="material-symbols-outlined text-error-rose/60 text-sm">close</span>
+<span class="font-body-md">Hohe Zinsen &amp; Gebühren</span>
+</li>
+<li class="flex items-center gap-3 text-text-dim">
+<span class="material-symbols-outlined text-error-rose/60 text-sm">close</span>
+<span class="font-body-md">Anhäufung von Schulden</span>
+</li>
+<li class="flex items-center gap-3 text-text-dim">
+<span class="material-symbols-outlined text-error-rose/60 text-sm">close</span>
+<span class="font-body-md">Schufa-Abfrage &amp; Score-Einfluss</span>
+</li>
+<li class="flex items-center gap-3 text-text-dim">
+<span class="material-symbols-outlined text-error-rose/60 text-sm">close</span>
+<span class="font-body-md">Monatliche Rückzahlungslast</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- DailyCheq Stream Card -->
+<div class="glass-panel rounded-[2rem] p-8 border-primary/30 relative overflow-hidden">
+<!-- Subtle background flow effect -->
+<div class="absolute top-0 right-0 w-48 h-48 bg-primary/10 blur-[60px] -z-10"></div>
+<div class="absolute bottom-0 left-0 w-32 h-32 bg-success-emerald/5 blur-[50px] -z-10"></div>
+<div class="space-y-6 relative z-10">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-primary text-3xl">verified</span>
+<h3 class="font-display-xl text-xl text-on-surface">DailyCheq Stream</h3>
+</div>
+<ul class="space-y-4">
+<li class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-success-emerald text-sm">check_circle</span>
+<span class="font-body-md">0% Zinsen – Immer</span>
+</li>
+<li class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-success-emerald text-sm">check_circle</span>
+<span class="font-body-md">Dein bereits erarbeitetes Eigentum</span>
+</li>
+<li class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-success-emerald text-sm">check_circle</span>
+<span class="font-body-md">Schufa-frei &amp; Diskret</span>
+</li>
+<li class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-success-emerald text-sm">check_circle</span>
+<span class="font-body-md">Volle Kontrolle über Cashflow</span>
+</li>
+</ul>
+<div class="pt-6 mt-4 border-t border-white/10">
+<p class="font-label-caps text-[10px] text-primary uppercase tracking-widest">
+            Dein Geld. In Echtzeit.
+          </p>
+</div>
+</div>
+</div>
+</div>
+</section><section class="border border-white/10 rounded-3xl p-8 md:p-16 my-24 mx-auto max-w-5xl shadow-2xl relative overflow-hidden" style="background-color: rgb(8, 8, 8);">
+<div class="absolute top-0 right-0 -mt-20 -mr-20 w-64 h-64 bg-primary/20 rounded-full blur-[80px]"></div>
+<div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-64 h-64 bg-secondary-container/20 rounded-full blur-[80px]"></div>
+<div class="max-w-3xl mx-auto text-center space-y-10 relative z-10">
+<div class="space-y-4">
+<h2 class="font-display-xl text-3xl md:text-5xl text-on-surface tracking-tight">
+        Bringe DailyCheq in <br class="hidden md:block">
+<span class="text-gradient-primary">dein Unternehmen.</span>
+</h2>
+<p class="font-body-md text-text-dim text-lg">
+        Du willst dein Gehalt in Echtzeit? Sag uns, wo du arbeitest, und wir kümmern uns um den Rest – diskret und unverbindlich.
+      </p>
+</div>
+<form class="glass-panel p-8 md:p-10 rounded-2xl md:rounded-3xl border border-white/10 space-y-6 bg-background/50">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="text-left space-y-2">
+<label class="font-label-caps text-[10px] text-text-dim uppercase tracking-widest pl-1">Dein Unternehmen</label>
+<input class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-on-surface focus:outline-none focus:border-primary/50 transition-colors placeholder:text-white/20 font-body-md" placeholder="Bsp. Tech GmbH" type="text">
+</div>
+<div class="text-left space-y-2">
+<label class="font-label-caps text-[10px] text-text-dim uppercase tracking-widest pl-1">Deine geschäftliche E-Mail</label>
+<input class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-on-surface focus:outline-none focus:border-primary/50 transition-colors placeholder:text-white/20 font-body-md" placeholder="name@unternehmen.de" type="email">
+</div>
+</div>
+<button class="btn-premium w-full bg-gradient-primary text-on-primary font-body-md text-[18px] font-semibold py-4 rounded-xl active:scale-95 shadow-lg shadow-primary/20" type="submit">
+        DailyCheq anfragen
+      </button>
+<p class="text-[12px] text-text-dim/60 font-body-sm text-center pt-2">
+        * Deine Anfrage erfolgt absolut anonym gegenüber deinem Arbeitgeber.
+      </p>
+</form>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden bg-surface-container/95 backdrop-blur-lg fixed bottom-6 left-1/2 -translate-x-1/2 w-[calc(100%-40px)] rounded-full z-50 border border-white/10 flex justify-around items-center p-2 shadow-2xl">
+<a class="flex items-center text-on-surface-variant px-4 py-2 hover:bg-surface-bright hover:text-on-surface rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 0;">grid_view</span>
+</a>
+<a class="flex items-center text-on-surface-variant px-4 py-2 hover:bg-surface-bright hover:text-on-surface rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 0;">account_balance_wallet</span>
+</a>
+<a class="flex items-center text-on-surface-variant px-4 py-2 hover:bg-surface-bright hover:text-on-surface rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 0;">credit_card</span>
+</a>
+<a class="flex items-center gap-2 bg-primary text-on-primary rounded-full px-6 py-2 transition-all active:scale-95 duration-200 shadow-lg shadow-primary/20" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">pie_chart</span>
+<span class="font-label-caps text-label-caps">Mitarbeiter</span>
+</a>
+</nav>
+<footer class="w-full border-t border-white/10" style="background-color: rgb(0, 0, 0);">
+<div class="max-w-[1440px] mx-auto px-gutter py-12">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-y-12 md:gap-x-12 mb-12">
+<div class="md:col-span-5 space-y-6">
+<div class="font-display text-2xl font-bold text-on-surface tracking-tight cursor-default hover:text-primary transition-colors">DailyCheq</div>
+<p class="font-body-md text-text-dim max-w-xs">Dein Gehalt, wann du es willst.</p>
+</div>
+<div class="md:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-8">
+<div class="space-y-4">
+<h4 class="text-on-surface font-display text-sm font-semibold uppercase tracking-wider">Rechtliches</h4>
+<ul class="space-y-3 font-body-sm text-sm">
+<li class=""><a class="footer-link-hover text-text-dim transition-all duration-200 inline-block" href="#">Impressum</a></li>
+<li class=""><a class="footer-link-hover text-text-dim transition-all duration-200 inline-block" href="#">Datenschutz</a></li>
+<li class=""><a class="footer-link-hover text-text-dim transition-all duration-200 inline-block" href="#">AGB</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="text-on-surface font-display text-sm font-semibold uppercase tracking-wider">Bedingungen</h4>
+<ul class="space-y-3 font-body-sm text-sm">
+<li class=""><a class="footer-link-hover text-text-dim transition-all duration-200 inline-block" href="#">AGB</a></li>
+<li class=""><a class="footer-link-hover text-text-dim transition-all duration-200 inline-block" href="#">Compliance</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="text-on-surface font-display text-sm font-semibold uppercase tracking-wider">Unternehmen</h4>
+<ul class="space-y-3 font-body-sm text-sm">
+<li class=""><a class="footer-link-hover text-text-dim transition-all duration-200 inline-block" href="#">Karriere</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-white/10">
+<p class="font-body-sm text-text-dim text-xs">© 2024 DailyCheq GbR. Alle Rechte vorbehalten. ISO 27001 zertifiziert.</p>
+</div>
+</div>
+</footer>
+<script>
+    // High-Dynamic StreamParticle class for hero flow
+    class StreamParticle {
+        constructor(width, height) {
+            this.canvasWidth = width;
+            this.canvasHeight = height;
+            this.palette = [
+                { color: 'rgba(34, 197, 94, opacity)', glow: '#22c55e', size: 2.8 },
+                { color: 'rgba(168, 85, 247, opacity)', glow: '#a855f7', size: 3.2 },
+                { color: 'rgba(239, 68, 68, opacity)', glow: '#ef4444', size: 2.5 },
+                { color: 'rgba(221, 183, 255, opacity)', glow: '#ddb7ff', size: 2.2 }
+            ];
+            this.trail = [];
+            this.maxTrail = 6;
+            this.reset();
+        }
+
+        reset() {
+            this.x = Math.random() * -100;
+            this.y = Math.random() * this.canvasHeight;
+            const theme = this.palette[Math.floor(Math.random() * this.palette.length)];
+            this.color = theme.color;
+            this.glow = theme.glow;
+            this.size = Math.random() * theme.size + 1.2;
+            this.speedX = Math.random() * 2.4 + 1.4;
+            this.waveAmp = Math.random() * 20 + 8;
+            this.waveFreq = Math.random() * 0.012 + 0.006;
+            this.angleOffset = Math.random() * Math.PI * 2;
+            this.opacity = Math.random() * 0.6 + 0.4;
+            this.trail = [];
+        }
+
+        update() {
+            this.trail.unshift({ x: this.x, y: this.y });
+            if (this.trail.length > this.maxTrail) this.trail.pop();
+
+            this.x += this.speedX;
+            this.y += Math.sin(this.x * this.waveFreq + this.angleOffset) * 0.9;
+
+            if (this.x > this.canvasWidth + 60) {
+                this.reset();
+            }
+        }
+
+        draw(ctx) {
+            ctx.save();
+            for (let i = 0; i < this.trail.length; i++) {
+                const pt = this.trail[i];
+                const trailOpacity = (this.opacity * (1 - i / this.trail.length)) * 0.4;
+                ctx.beginPath();
+                ctx.arc(pt.x, pt.y, Math.max(0.5, this.size * (1 - i / this.trail.length)), 0, Math.PI * 2);
+                ctx.fillStyle = this.color.replace('opacity', trailOpacity);
+                ctx.fill();
+            }
+
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = this.color.replace('opacity', this.opacity);
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = this.glow;
+            ctx.fill();
+            ctx.restore();
+        }
+    }
+
+    function initHeroFlow(canvasId, count = 110) {
+        const canvas = document.getElementById(canvasId);
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resize() {
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+            particles = [];
+            for (let i = 0; i < count; i++) {
+                particles.push(new StreamParticle(canvas.width, canvas.height));
+            }
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw(ctx);
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    }
+
+    // ==========================================
+    // SANKEY MONEY STREAM ANALYSIS ENGINE
+    // Exact visual representation of images IMAGE_141 & IMAGE_3
+    // ==========================================
+    class SankeyMoneyStream {
+        constructor(canvasId) {
+            this.canvas = document.getElementById(canvasId);
+            if (!this.canvas) return;
+            this.ctx = this.canvas.getContext('2d');
+            this.particles = [];
+            this.time = 0;
+            this.filterMode = 'live';
+
+            this.resize();
+            window.addEventListener('resize', () => {
+                this.resize();
+            });
+
+            this.initStreamParticles();
+            this.animate();
+        }
+
+        resize() {
+            if (!this.canvas) return;
+            const rect = this.canvas.getBoundingClientRect();
+            this.dpr = window.devicePixelRatio || 1;
+            this.canvas.width = rect.width * this.dpr;
+            this.canvas.height = rect.height * this.dpr;
+            this.width = rect.width;
+            this.height = rect.height;
+            this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+            this.ctx.scale(this.dpr, this.dpr);
+            this.calcGeometry();
+        }
+
+        calcGeometry() {
+            const w = this.width;
+            const h = this.height;
+
+            // Define Nodes based on mobile reference (scaled organically to wide container)
+            this.source = { x: w * 0.08, y: h * 0.48 };
+
+            // Primary branch targets
+            this.fixNode = { x: w * 0.42, y: h * 0.12 };
+            this.vaultNode = { x: w * 0.42, y: h * 0.48 };
+            this.freeNode = { x: w * 0.42, y: h * 0.82 };
+
+            // Sub-branches from FIX node
+            this.subFixNodes = [
+                { name: 'MIETE', val: '14.50€', x: w * 0.88, y: h * 0.10, spread: 0.18, color: '#ef4444' },
+                { name: 'INTERNET', val: '1.50€', x: w * 0.88, y: h * 0.28, spread: 0.35, color: '#f87171' },
+                { name: 'NETFLIX', val: '1.20€', x: w * 0.88, y: h * 0.49, spread: 0.55, color: '#ef4444' },
+                { name: 'ENERGIE', val: '3.10€', x: w * 0.88, y: h * 0.70, spread: 0.75, color: '#f87171' },
+                { name: 'HANDY', val: '1.67€', x: w * 0.88, y: h * 0.90, spread: 0.95, color: '#ef4444' }
+            ];
+
+            // Define Cubic Bezier Pathways:
+            // 1. Source -> Fix
+            this.pathSrcToFix = {
+                p0: this.source,
+                p1: { x: w * 0.20, y: h * 0.48 },
+                p2: { x: w * 0.28, y: h * 0.14 },
+                p3: this.fixNode,
+                color: '#ef4444',
+                glow: 'rgba(239, 68, 68, 0.4)',
+                label: 'FIX',
+                tag: '21.97 €'
+            };
+
+            // 2. Source -> Vault
+            this.pathSrcToVault = {
+                p0: this.source,
+                p1: { x: w * 0.20, y: h * 0.48 },
+                p2: { x: w * 0.32, y: h * 0.48 },
+                p3: this.vaultNode,
+                color: '#a855f7',
+                glow: 'rgba(168, 85, 247, 0.45)',
+                label: 'VAULT',
+                tag: '13.41 €'
+            };
+
+            // 3. Source -> Free
+            this.pathSrcToFree = {
+                p0: this.source,
+                p1: { x: w * 0.18, y: h * 0.50 },
+                p2: { x: w * 0.26, y: h * 0.82 },
+                p3: this.freeNode,
+                color: '#10B981',
+                glow: 'rgba(16, 185, 129, 0.45)',
+                label: 'FREE',
+                tag: '47.95 €'
+            };
+
+            // 4. Sub-paths from Fix Node to Individual Fixed Expenses
+            this.subFixPaths = this.subFixNodes.map(sub => {
+                return {
+                    p0: this.fixNode,
+                    p1: { x: w * 0.50, y: this.fixNode.y },
+                    p2: { x: w * 0.65, y: sub.y * 0.85 + this.fixNode.y * 0.15 },
+                    p3: { x: sub.x, y: sub.y },
+                    color: sub.color,
+                    glow: 'rgba(239, 68, 68, 0.35)',
+                    name: sub.name,
+                    val: sub.val
+                };
+            });
+        }
+
+        getBezierPoint(p0, p1, p2, p3, t) {
+            const u = 1 - t;
+            const tt = t * t;
+            const uu = u * u;
+            const uuu = uu * u;
+            const ttt = tt * t;
+
+            return {
+                x: uuu * p0.x + 3 * uu * t * p1.x + 3 * u * tt * p2.x + ttt * p3.x,
+                y: uuu * p0.y + 3 * uu * t * p1.y + 3 * u * tt * p2.y + ttt * p3.y
+            };
+        }
+
+        initStreamParticles() {
+            this.particles = [];
+            const count = 180;
+            for (let i = 0; i < count; i++) {
+                this.particles.push(this.createParticle());
+            }
+        }
+
+        createParticle() {
+            // Decide which main stream: 35% Fix, 25% Vault, 40% Free
+            const rand = Math.random();
+            let routeType = 'fix';
+            let subIndex = 0;
+
+            if (rand < 0.40) {
+                routeType = 'fix';
+                subIndex = Math.floor(Math.random() * 5);
+            } else if (rand < 0.65) {
+                routeType = 'vault';
+            } else {
+                routeType = 'free';
+            }
+
+            return {
+                routeType: routeType,
+                subIndex: subIndex,
+                stage: 1, // stage 1: Source to node, stage 2: Fix to sub-expense
+                progress: Math.random(),
+                speed: Math.random() * 0.0035 + 0.0025,
+                size: Math.random() * 2.6 + 1.2,
+                jitterX: (Math.random() - 0.5) * 6,
+                jitterY: (Math.random() - 0.5) * 6,
+                opacity: Math.random() * 0.6 + 0.4
+            };
+        }
+
+        update() {
+            this.time += 0.02;
+            for (let i = 0; i < this.particles.length; i++) {
+                const p = this.particles[i];
+                p.progress += p.speed;
+
+                if (p.stage === 1) {
+                    if (p.progress >= 1) {
+                        if (p.routeType === 'fix') {
+                            p.stage = 2;
+                            p.progress = 0;
+                        } else {
+                            // Reset
+                            Object.assign(p, this.createParticle());
+                            p.progress = 0;
+                        }
+                    }
+                } else if (p.stage === 2) {
+                    if (p.progress >= 1) {
+                        Object.assign(p, this.createParticle());
+                        p.progress = 0;
+                    }
+                }
+            }
+        }
+
+        drawPathUnderlay(p0, p1, p2, p3, strokeColor, glowColor, width = 3) {
+            const ctx = this.ctx;
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(p0.x, p0.y);
+            ctx.bezierCurveTo(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y);
+
+            // Glow under-layer
+            ctx.strokeStyle = glowColor;
+            ctx.lineWidth = width + 5;
+            ctx.shadowColor = strokeColor;
+            ctx.shadowBlur = 16;
+            ctx.stroke();
+
+            // Sharp path stroke
+            ctx.beginPath();
+            ctx.moveTo(p0.x, p0.y);
+            ctx.bezierCurveTo(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y);
+            ctx.strokeStyle = strokeColor;
+            ctx.lineWidth = width;
+            ctx.shadowBlur = 0;
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        draw() {
+            const ctx = this.ctx;
+            ctx.clearRect(0, 0, this.width, this.height);
+
+            // 1. Draw static guide paths with glow
+            // Main 3 branches
+            this.drawPathUnderlay(
+                this.pathSrcToFix.p0, this.pathSrcToFix.p1, this.pathSrcToFix.p2, this.pathSrcToFix.p3,
+                'rgba(239, 68, 68, 0.45)', 'rgba(239, 68, 68, 0.15)', 3.5
+            );
+
+            this.drawPathUnderlay(
+                this.pathSrcToVault.p0, this.pathSrcToVault.p1, this.pathSrcToVault.p2, this.pathSrcToVault.p3,
+                'rgba(168, 85, 247, 0.55)', 'rgba(168, 85, 247, 0.18)', 4
+            );
+
+            this.drawPathUnderlay(
+                this.pathSrcToFree.p0, this.pathSrcToFree.p1, this.pathSrcToFree.p2, this.pathSrcToFree.p3,
+                'rgba(16, 185, 129, 0.6)', 'rgba(16, 185, 129, 0.2)', 4
+            );
+
+            // Sub-branches from FIX
+            this.subFixPaths.forEach(sp => {
+                this.drawPathUnderlay(
+                    sp.p0, sp.p1, sp.p2, sp.p3,
+                    'rgba(239, 68, 68, 0.35)', 'rgba(239, 68, 68, 0.12)', 2
+                );
+            });
+
+            // 2. Render Moving Flow Particles along the curves
+            for (let i = 0; i < this.particles.length; i++) {
+                const p = this.particles[i];
+                let pt = null;
+                let color = '#ffffff';
+                let glow = '#ffffff';
+
+                if (p.stage === 1) {
+                    if (p.routeType === 'fix') {
+                        pt = this.getBezierPoint(this.pathSrcToFix.p0, this.pathSrcToFix.p1, this.pathSrcToFix.p2, this.pathSrcToFix.p3, p.progress);
+                        color = '#f87171';
+                        glow = '#ef4444';
+                    } else if (p.routeType === 'vault') {
+                        pt = this.getBezierPoint(this.pathSrcToVault.p0, this.pathSrcToVault.p1, this.pathSrcToVault.p2, this.pathSrcToVault.p3, p.progress);
+                        color = '#c084fc';
+                        glow = '#a855f7';
+                    } else {
+                        pt = this.getBezierPoint(this.pathSrcToFree.p0, this.pathSrcToFree.p1, this.pathSrcToFree.p2, this.pathSrcToFree.p3, p.progress);
+                        color = '#34d399';
+                        glow = '#10B981';
+                    }
+                } else if (p.stage === 2 && p.routeType === 'fix') {
+                    const subP = this.subFixPaths[p.subIndex];
+                    if (subP) {
+                        pt = this.getBezierPoint(subP.p0, subP.p1, subP.p2, subP.p3, p.progress);
+                        color = '#ef4444';
+                        glow = '#f87171';
+                    }
+                }
+
+                if (pt) {
+                    ctx.save();
+                    ctx.beginPath();
+                    const rx = pt.x + p.jitterX * (1 - p.progress * 0.5);
+                    const ry = pt.y + p.jitterY * (1 - p.progress * 0.5);
+                    ctx.arc(rx, ry, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = color;
+                    ctx.shadowColor = glow;
+                    ctx.shadowBlur = 12;
+                    ctx.globalAlpha = p.opacity;
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+
+            // 3. Render High-Tech Node Badges & Typography Labels
+            // Source Node Point
+            this.drawGlowingNode(this.source.x, this.source.y, '#ddb7ff', 5);
+
+            // FIX Node
+            this.drawGlowingNode(this.fixNode.x, this.fixNode.y, '#ef4444', 6);
+            this.drawTextLabel('FIX', '21.97 €/Tag', this.fixNode.x, this.fixNode.y - 18, '#ffffff', '#ef4444', 'center');
+
+            // VAULT Node
+            this.drawGlowingNode(this.vaultNode.x, this.vaultNode.y, '#a855f7', 6);
+            this.drawTextLabel('VAULT', '13.41 €/Tag', this.vaultNode.x, this.vaultNode.y - 18, '#ffffff', '#a855f7', 'center');
+
+            // FREE Node
+            this.drawGlowingNode(this.freeNode.x, this.freeNode.y, '#10B981', 6);
+            this.drawTextLabel('FREE', '47.95 €/Tag', this.freeNode.x, this.freeNode.y - 18, '#ffffff', '#10B981', 'center');
+
+            // Sub-branches labels on the right edge
+            this.subFixNodes.forEach(item => {
+                this.drawGlowingNode(item.x, item.y, '#ef4444', 3.5);
+                this.drawTextLabel(item.name, item.val, item.x + 12, item.y + 4, '#e5e2e1', '#ef4444', 'left');
+            });
+        }
+
+        drawGlowingNode(x, y, color, radius) {
+            const ctx = this.ctx;
+            ctx.save();
+            // Outer pulse halo
+            ctx.beginPath();
+            ctx.arc(x, y, radius * 2.2, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.globalAlpha = 0.25;
+            ctx.shadowColor = color;
+            ctx.shadowBlur = 16;
+            ctx.fill();
+
+            // White core dot
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.globalAlpha = 1;
+            ctx.shadowBlur = 12;
+            ctx.shadowColor = color;
+            ctx.fill();
+            ctx.restore();
+        }
+
+        drawTextLabel(title, sub, x, y, titleColor, tagColor, align = 'center') {
+            const ctx = this.ctx;
+            ctx.save();
+            ctx.textAlign = align;
+            ctx.font = '600 12px "JetBrains Mono", monospace';
+            ctx.fillStyle = titleColor;
+            ctx.shadowColor = tagColor;
+            ctx.shadowBlur = 8;
+            ctx.fillText(title, x, y);
+
+            if (sub) {
+                ctx.font = '400 10px "Inter", sans-serif';
+                ctx.fillStyle = 'rgba(207, 194, 214, 0.75)';
+                ctx.shadowBlur = 0;
+                ctx.fillText(sub, x, y + 14);
+            }
+            ctx.restore();
+        }
+
+        animate() {
+            this.update();
+            this.draw();
+            requestAnimationFrame(() => this.animate());
+        }
+    }
+
+    // Money Counters and UI Scripts
+    (function() {
+        // Initialize Hero & Ambient Background Flow
+        initHeroFlow('hero-flow-canvas', 130);
+        initHeroFlow('ambient-dashboard-canvas', 90);
+
+        // Instantiate the Sankey Diagram
+        const sankeyStream = new SankeyMoneyStream('sankey-stream-canvas');
+
+        // Money Streaming Logic with Smooth Ticker
+        let amount = 130.243087;
+        const ratePerSecond = 0.0015046;
+        let lastTime = performance.now();
+        const counterElement = document.getElementById('live-money-counter');
+
+        function updateCounter(currentTime) {
+            const deltaTime = (currentTime - lastTime) / 1000;
+            amount += ratePerSecond * deltaTime;
+            lastTime = currentTime;
+            if (counterElement) {
+                counterElement.innerText = amount.toLocaleString('de-DE', { minimumFractionDigits: 6, maximumFractionDigits: 6 });
+            }
+            requestAnimationFrame(updateCounter);
+        }
+        if (counterElement) requestAnimationFrame(updateCounter);
+
+        let vaultAmount = 450.032312;
+        const vaultRatePerSecond = 0.0002;
+        let vaultLastTime = performance.now();
+        const vaultCounterElement = document.getElementById('vault-money-counter');
+
+        function updateVaultCounter(currentTime) {
+            const deltaTime = (currentTime - vaultLastTime) / 1000;
+            vaultAmount += vaultRatePerSecond * deltaTime;
+            vaultLastTime = currentTime;
+            if (vaultCounterElement) {
+                vaultCounterElement.innerText = '€ ' + vaultAmount.toLocaleString('de-DE', { minimumFractionDigits: 6, maximumFractionDigits: 6 });
+            }
+            requestAnimationFrame(updateVaultCounter);
+        }
+        if (vaultCounterElement) requestAnimationFrame(updateVaultCounter);
+
+        // Filter Pills Handler
+        const filterBtns = document.querySelectorAll('.filter-pill');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('pill-active');
+                    b.classList.add('text-text-dim');
+                });
+                btn.classList.add('pill-active');
+                btn.classList.remove('text-text-dim');
+            });
+        });
+
+        // Carousel Logic
+        const track = document.getElementById('carousel-track');
+        const prevBtn = document.getElementById('carousel-prev');
+        const nextBtn = document.getElementById('carousel-next');
+        const dots = document.querySelectorAll('.carousel-dot');
+        let currentIndex = 1;
+        const totalSlides = 3;
+
+        function updateCarousel() {
+            if (!track) return;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach((dot, index) => {
+                if (index === currentIndex) {
+                    dot.classList.remove('bg-white/20', 'hover:bg-white/40');
+                    dot.classList.add('bg-primary', 'shadow-[0_0_8px_rgba(221,183,255,0.6)]');
+                } else {
+                    dot.classList.add('bg-white/20', 'hover:bg-white/40');
+                    dot.classList.remove('bg-primary', 'shadow-[0_0_8px_rgba(221,183,255,0.6)]');
+                }
+            });
+        }
+
+        if(prevBtn) prevBtn.addEventListener('click', () => { currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; updateCarousel(); });
+        if(nextBtn) nextBtn.addEventListener('click', () => { currentIndex = (currentIndex + 1) % totalSlides; updateCarousel(); });
+        dots.forEach((dot, index) => dot.addEventListener('click', () => { currentIndex = index; updateCarousel(); }));
+        
+        // Ensure initial state matches
+        updateCarousel();
+    })();
+</script>
+
+
+</body></html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html><html class="dark" lang="de" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>DailyCheq | Dein Gehalt gehört dir. Ab der ersten Sekunde.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Geist:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ddb7ff",
+                        "primary-container": "#581c87",
+                        "secondary": "#cfbcff",
+                        "on-primary-container": "#ca8efc",
+                        "surface": "#081425",
+                        "background": "#000000",
+                        "on-surface": "#d8e3fb",
+                        "on-surface-variant": "#cfc2d2",
+                        "outline": "#988d9c",
+                        "glass-stroke": "rgba(255, 255, 255, 0.08)",
+                        "text-dim": "#94A3B8",
+                        "success-emerald": "#10B981",
+                        "error-rose": "#F43F5E",
+                        "tertiary": "#ddb7ff"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        "unit": "8px",
+                        "gutter": "24px",
+                        "container-max": "1440px",
+                        "margin-desktop": "64px",
+                        "margin-mobile": "20px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "container-padding": "24px"
+                    },
+                    fontFamily: {
+                        "headline-xl": ["Hanken Grotesk", "sans-serif"],
+                        "headline-lg": ["Hanken Grotesk", "sans-serif"],
+                        "body-md": ["Geist", "sans-serif"],
+                        "body-sm": ["Geist", "sans-serif"],
+                        "label-caps": ["JetBrains Mono", "monospace"],
+                        "display-xl": ["Hanken Grotesk", "sans-serif"]
+                    }
+                }
+            }
+        };
+    </script>
+<style>
+        .tabular-nums {
+            font-variant-numeric: tabular-nums;
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
+<meta content="web_standard" name="shell-type">
+</head>
+<body class="font-body-md text-white bg-black min-h-screen antialiased overflow-x-hidden selection:bg-primary/20 relative">
+<!-- WebGL Shader Background -->
+<!-- STITCH_SHADER_START:ANIMATION_230 class="fixed inset-0 w-full h-full pointer-events-none z-0" -->
+<div class="fixed inset-0 w-full h-full pointer-events-none z-0" style="display:block;">
+<canvas id="shader-canvas-ANIMATION_230" style="display:block;width:100%;height:100%" width="1280" height="1537"></canvas>
+<script>
+(function() {
+  const canvas = document.getElementById('shader-canvas-ANIMATION_230');
+
+  // Sync the WebGL drawing-buffer size with the CSS-driven layout size.
+  // This fires on initial layout and whenever the element is resized.
+  function syncSize() {
+    const w = canvas.clientWidth  || 1280;
+    const h = canvas.clientHeight || 720;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width  = w;
+      canvas.height = h;
+    }
+  }
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncSize).observe(canvas);
+  }
+  syncSize();
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+  const vs = `attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}`;
+  const fs = `precision highp float;
+
+uniform float u_time;
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+varying vec2 v_texCoord;
+
+// Deterministic pseudo-random hash
+float hash1(float n) {
+    return fract(sin(n) * 43758.5453123);
+}
+
+void main() {
+    vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+    vec2 aspect = vec2(u_resolution.x / u_resolution.y, 1.0);
+
+    // Deep obsidian black background
+    vec3 col = vec3(0.0, 0.0, 0.0);
+
+    // Strict brand colors - completely flat, solid saturated neon fintech hues
+    // Keine Aufhellung zur Mitte, komplett einfarbige Punkte!
+    vec3 colRed    = vec3(1.0, 0.18, 0.32);      // Fixkosten (Top)
+    vec3 colPurple = vec3(0.74, 0.33, 1.0);       // The Vault / Engine (Center)
+    vec3 colGreen  = vec3(0.08, 0.96, 0.52);      // Freies Guthaben (Bottom)
+
+    float t = u_time * 0.38;
+
+    // Convergence center point perfectly aligned inside DailyCheq Engine block center:
+    vec2 centerPoint = vec2(0.50, 0.495);
+
+    // Target Y positions for the 3 lanes on the right side:
+    // Lane 0: Fixkosten / Red (Y = 0.68)
+    // Lane 1: The Vault / Purple (Y = 0.495, horizontal)
+    // Lane 2: Freies Guthaben / Green (Y = 0.31)
+    float targets[3];
+    targets[0] = 0.68;
+    targets[1] = 0.495;
+    targets[2] = 0.31;
+
+    // -------------------------------------------------------------
+    // 1. RAZOR-SHARP LASER GUIDE RAILS (Crisp & clear edges, subtle solid tone)
+    // -------------------------------------------------------------
+    for (int b = 0; b < 3; b++) {
+        float targetY = targets[b];
+        vec3 branchCol = (b == 0) ? colRed : ((b == 1) ? colPurple : colGreen);
+
+        float laneRailY = targetY;
+        if (uv.x < 0.50) {
+            laneRailY = centerPoint.y;
+        } else if (uv.x >= 0.50 && uv.x < 0.86) {
+            float s = clamp((uv.x - 0.50) / 0.36, 0.0, 1.0);
+            float ease = s * s * s * (s * (s * 6.0 - 15.0) + 10.0);
+            laneRailY = mix(centerPoint.y, targetY, ease);
+        } else {
+            laneRailY = targetY;
+        }
+
+        float dist = abs(uv.y - laneRailY);
+        float lineCore = exp(-dist * 850.0) * 0.35 + exp(-dist * 350.0) * 0.10;
+        float lineVisibility = smoothstep(0.485, 0.54, uv.x);
+        col += branchCol * lineCore * lineVisibility;
+    }
+
+    // Concentrated central node glow right inside the DAILYCHEQ ENGINE module (Pure solid purple)
+    float centerDist = length((uv - centerPoint) * vec2(aspect.x, 1.0));
+    float centerGlow = exp(-centerDist * 65.0) * 0.50 + exp(-centerDist * 28.0) * 0.15;
+    col += colPurple * centerGlow;
+
+    // -------------------------------------------------------------
+    // 2. PARTICLES:
+    // Komplett einfarbig (solid color), keine Aufhellung zur Mitte hin!
+    // Gestochen scharfe Kanten.
+    // Ausdünnen nach der Sortierung (px >= 0.50): Einige Partikel werden nach dem Knotenpunkt
+    // nicht auf die rechte Bahn übernommen bzw. die Dichte nach rechts wird reduziert.
+    // -------------------------------------------------------------
+    const int PARTICLES_PER_LANE = 140;
+    float pRadius = 0.0022;
+
+    for (int lane = 0; lane < 3; lane++) {
+        float targetY = targets[lane];
+        vec3 pCol = (lane == 0) ? colRed : ((lane == 1) ? colPurple : colGreen);
+
+        float speed = 0.22 + float(lane) * 0.025;
+
+        for (int j = 0; j < PARTICLES_PER_LANE; j++) {
+            float fj = float(j);
+            float pSeed = float(lane) * 317.89 + fj * 13.731;
+
+            // X advances continuously from 0.0 to 1.0
+            float px = fract(t * speed + (fj / float(PARTICLES_PER_LANE)));
+
+            // Random initial entry Y across the left edge
+            float initialRandomY = 0.15 + hash1(pSeed) * 0.70;
+
+            float py = centerPoint.y;
+
+            // Ausdünnen auf der rechten Seite: ca. 45% der Partikel werden nach der Sortierung absorbiert / ausgeblendet
+            // Dadurch ist der linke Zufluss dynamisch und dicht, und die sortierten Ströme rechts sind edel ausgedünnt!
+            float postSortSurvive = hash1(pSeed + 77.13);
+            bool isFilteredOut = (px >= 0.50) && (postSortSurvive > 0.55);
+
+            if (!isFilteredOut) {
+                if (px < 0.50) {
+                    // Phase 1: From left (x=0) to center (x=0.50)
+                    float convProgress = clamp(px / 0.50, 0.0, 1.0);
+                    float easeIn = convProgress * convProgress * (3.0 - 2.0 * convProgress);
+                    py = mix(initialRandomY, centerPoint.y, easeIn);
+                } else {
+                    // Phase 2: From center (x=0.50) to right (x=1.0)
+                    float branchProgress = clamp((px - 0.50) / 0.36, 0.0, 1.0);
+                    float easeOut = branchProgress * branchProgress * branchProgress * (branchProgress * (branchProgress * 6.0 - 15.0) + 10.0);
+                    py = mix(centerPoint.y, targetY, easeOut);
+                }
+
+                vec2 pPos = vec2(px, py);
+                float pDist = length((uv - pPos) * vec2(aspect.x, 1.0));
+
+                // Gestochen scharfe Kante mit minimalem Anti-Aliasing (1-2px)
+                // Absolut flach gefüllt (solid 1.0), keine Aufhellung oder Gradient zur Mitte
+                float edgeAlpha = 1.0 - smoothstep(pRadius * 0.85, pRadius, pDist);
+                if (edgeAlpha > 0.0) {
+                    col += pCol * edgeAlpha;
+                }
+            }
+        }
+    }
+
+    // Clean edge mask
+    float edgeMask = smoothstep(0.0, 0.015, uv.x) * (1.0 - smoothstep(0.985, 1.0, uv.x));
+    col *= edgeMask;
+
+    // Clamping to avoid blow-outs
+    col = min(col, vec3(1.0));
+
+    gl_FragColor = vec4(col, 1.0);
+}`;
+  function cs(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+  gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pos = gl.getAttribLocation(prog, 'a_position');
+  gl.enableVertexAttribArray(pos);
+  gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes = gl.getUniformLocation(prog, 'u_resolution');
+  const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+
+  // u_mouse is in pixel coordinates matching u_resolution (ShaderToy convention).
+  // Shaders that need normalized coords should use: u_mouse / u_resolution.
+  let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+  window.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width && rect.height) {
+      const nx = (event.clientX - rect.left) / rect.width;
+      const ny = 1.0 - (event.clientY - rect.top) / rect.height;
+      mouse.x = nx * canvas.width;
+      mouse.y = ny * canvas.height;
+    }
+  });
+
+  function render(t) {
+    if (typeof ResizeObserver === 'undefined') syncSize();
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    if (uTime) gl.uniform1f(uTime, t * 0.001);
+    if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+    if (uMouse) gl.uniform2f(uMouse, mouse.x, mouse.y);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  render(0);
+})();
+</script>
+</div>
+<!-- STITCH_SHADER_END:ANIMATION_230 -->
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-black/40 backdrop-blur-xl border-b border-white/[0.06]">
+<div class="max-w-7xl mx-auto px-6 sm:px-8 h-16 flex items-center justify-between">
+<a class="text-xl font-bold tracking-tight text-white flex items-center gap-1.5 transition-colors group" href="{{DATA:SCREEN:SCREEN_3}}">
+<span class="">DailyCheq</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_10px_rgba(221,183,255,0.8)]"></span>
+</a>
+<nav class="hidden md:flex items-center gap-8 text-[13px] tracking-wide">
+<a class="text-white font-medium relative py-1 transition-colors after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-primary after:shadow-[0_0_8px_rgba(221,183,255,0.8)]" href="{{DATA:SCREEN:SCREEN_3}}">Startseite</a>
+<a class="text-text-dim hover:text-white transition-colors duration-200" href="{{DATA:SCREEN:SCREEN_17}}">Mitarbeitende</a>
+<a class="text-text-dim hover:text-white transition-colors duration-200 backdrop-blur-md" href="{{DATA:SCREEN:SCREEN_71}}">Unternehmen</a>
+<a class="text-text-dim hover:text-white transition-colors duration-200" href="{{DATA:SCREEN:SCREEN_6}}">Preise</a>
+</nav>
+<div class="flex items-center gap-4">
+<a class="border border-white/20 hover:border-primary/50 bg-white/[0.03] hover:bg-primary/20 text-white text-[12px] font-medium tracking-wider px-4 py-2 rounded-full transition-all duration-300 shadow-sm active:scale-95 backdrop-blur-md" href="#demo">
+        Demo buchen
+      </a>
+</div>
+</div>
+</header>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-stack-md left-1/2 -translate-x-1/2 w-[calc(100%-40px)] rounded-full z-50 bg-black/80 backdrop-blur-xl border border-white/[0.08] flex justify-around items-center p-2 shadow-2xl">
+<a class="flex items-center gap-2 bg-primary/20 border border-primary/40 text-white rounded-full px-6 py-2 active:scale-95 duration-200" href="{{DATA:SCREEN:SCREEN_3}}">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: &quot;FILL&quot; 1;">grid_view</span>
+<span class="font-label-caps text-[11px] uppercase tracking-wider">Home</span>
+</a>
+<a class="flex items-center text-on-surface-variant px-4 py-2" href="{{DATA:SCREEN:SCREEN_17}}">
+<span class="material-symbols-outlined">credit_card</span>
+</a>
+<a class="flex items-center text-on-surface-variant px-4 py-2 backdrop-blur-md" href="{{DATA:SCREEN:SCREEN_71}}">
+<span class="material-symbols-outlined">domain</span>
+</a>
+<a class="flex items-center text-on-surface-variant px-4 py-2" href="{{DATA:SCREEN:SCREEN_6}}">
+<span class="material-symbols-outlined">payments</span>
+</a>
+</nav>
+<main class="relative z-10 bg-transparent">
+<div class="flex flex-col w-full relative">
+<section class="relative w-full flex flex-col items-center text-center px-container-padding py-stack-lg select-none pt-24 sm:pt-28 overflow-hidden">
+<div class="relative z-10 flex flex-col items-center max-w-5xl mx-auto my-auto px-4 w-full pt-8">
+<div class="flex flex-col items-center gap-stack-md w-full">
+<!-- Hero Headline -->
+<h1 class="text-4xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight max-w-4xl leading-[1.1] text-center pt-2">
+  Dein Gehalt gehört dir.<br class="hidden sm:inline">
+<span class="bg-gradient-to-r from-primary via-secondary to-[#c084fc] bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(221,183,255,0.35)]"> Ab der ersten Sekunde.</span>
+</h1>
+<p class="font-body-md text-[15px] sm:text-[17px] text-text-dim max-w-2xl text-center leading-relaxed mt-2">
+  Kein 30-Tage-Warten. Der kontinuierliche Gehalts-Stream teilt sich in Echtzeit automatisiert in Fixkosten, Vermögensaufbau und sofort freies Guthaben auf.
+</p>
+<!-- RTEWA Container - Ultra-luxurious Dripping Glassmorphism -->
+<div class="w-full max-w-3xl mt-10 mx-auto p-6 sm:p-8 rounded-2xl border hover:border-primary/40 shadow-[0_8px_32px_0_rgba(0,0,0,0.36),inset_0_1px_1px_rgba(255,255,255,0.15)] flex flex-col items-center gap-6 relative overflow-hidden text-center transition-all duration-300 backdrop-blur-md bg-white/[0.02] border-white/[0.08]">
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary shadow-[0_0_10px_rgba(221,183,255,0.8)]"></span>
+</span>
+<span class="font-label-caps text-[11px] uppercase tracking-widest text-primary font-semibold">RTEWA · Die Schnittstelle der Zukunft</span>
+</div>
+<div class="flex flex-col gap-2.5 max-w-2xl">
+<h3 class="font-headline-lg text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
+  Weltweit erste <span class="bg-gradient-to-r from-primary via-secondary to-[#c084fc] bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(221,183,255,0.35)]">Real-Time Earned Wage Access</span> Infrastruktur
+</h3>
+<p class="font-body-sm text-[13px] sm:text-[14px] text-white/85 leading-relaxed">
+  DailyCheq schließt nahtlos die Lücke zwischen Unternehmen und Belegschaft: Während Ihr Arbeitgeberkapital bis zum Zahltag zu 100% unangetastet bleibt, verwandelt DailyCheq erarbeitete Arbeitszeit in einen kontinuierlichen, sekundengenauen Lohn-Stream direkt auf die DailyCheq Card – ohne Kredit, ohne Zinsen, ohne Schufa.
+</p>
+</div>
+<!-- 3-Column Glass Split -->
+<div class="w-full grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1 text-left">
+<div class="flex flex-col p-4 rounded-xl bg-white/[0.02] backdrop-blur-md border border-white/[0.08] shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] hover:border-primary/40 hover:bg-white/[0.06] transition-all duration-300">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-[18px]">domain</span>
+<span class="font-label-caps text-[11px] text-white uppercase tracking-wider font-semibold">Unternehmen &amp; HR</span>
+</div>
+<span class="font-body-sm text-[12px] text-text-dim leading-relaxed">0% Liquiditätsbelastung. Vollautomatische Integration in DATEV, Personio &amp; SAP.</span>
+</div>
+<div class="flex flex-col p-4 rounded-xl backdrop-blur-md border border-primary/30 shadow-[0_0_20px_rgba(168,85,247,0.15),inset_0_1px_1px_rgba(255,255,255,0.12)] hover:border-primary/60 hover:bg-purple-900/20 transition-all duration-300 relative overflow-hidden bg-white/[0.03]">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-[18px]">hub</span>
+<span class="font-label-caps text-[11px] text-primary uppercase tracking-wider font-semibold">DailyCheq Engine</span>
+</div>
+<span class="font-body-sm text-[12px] text-white/80 leading-relaxed">Real-Time Streaming Protocol. 100% vorfinanziert &amp; MiCA-konform reguliert.</span>
+</div>
+<div class="flex flex-col p-4 rounded-xl bg-white/[0.02] backdrop-blur-md border border-white/[0.08] shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)] hover:border-success-emerald/40 hover:bg-white/[0.06] transition-all duration-300">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-success-emerald text-[18px]">account_balance_wallet</span>
+<span class="font-label-caps text-[11px] text-white uppercase tracking-wider font-semibold">Mitarbeitende</span>
+</div>
+<span class="font-body-sm text-[12px] text-text-dim leading-relaxed">Sekundengenaue Auszahlung. Volle Liquidität &amp; automatischer Vermögensaufbau.</span>
+</div>
+</div>
+<!-- Subtle Glass Divider -->
+<div class="w-full h-[1px] bg-white/[0.08] my-1"></div>
+<!-- Integrated Action Buttons -->
+<div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+  <a class="group relative flex flex-col justify-between p-5 rounded-2xl bg-black/60 hover:bg-[#19112a]/80 border border-primary/30 hover:border-primary/60 shadow-[0_4px_24px_rgba(0,0,0,0.5),0_0_20px_rgba(168,85,247,0.15)] hover:shadow-[0_4px_30px_rgba(0,0,0,0.6),0_0_25px_rgba(221,183,255,0.25)] transition-all duration-300 text-left active:scale-[0.98] backdrop-blur-xl overflow-hidden" href="{{DATA:SCREEN:SCREEN_71}}"><div class="flex items-center justify-between gap-3 mb-4"><div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center transition-all duration-300 group-hover:bg-primary/20 shadow-[0_0_12px_rgba(221,183,255,0.15)]"><span class="material-symbols-outlined text-[20px] text-primary">domain</span></div><div class="w-10 h-10 rounded-full bg-white/[0.03] border border-white/10 group-hover:bg-primary group-hover:text-black flex items-center justify-center transition-all duration-300 flex-shrink-0"><span class="material-symbols-outlined text-[20px] text-white/70 group-hover:text-black group-hover:translate-x-0.5 transition-all duration-300">arrow_forward</span></div></div><div class="flex flex-col gap-1.5"><div class="font-headline-lg text-[20px] sm:text-[22px] font-bold text-white group-hover:text-primary transition-colors tracking-tight">Für Unternehmen</div><span class="font-label-caps text-[11px] text-white/70 group-hover:text-white/90 tracking-wider uppercase transition-colors flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span>0% Liquiditäts-Impact · B2B Benefit</span></div><div class="mt-4 pt-3 border-t border-white/[0.08] flex items-center justify-between text-primary text-[12px] font-medium"><span class="font-label-caps tracking-wider uppercase text-[11px] text-text-dim group-hover:text-primary transition-colors">Lösung &amp; Integration</span><span class="inline-flex items-center gap-1 text-primary group-hover:translate-x-0.5 transition-transform font-semibold text-[12px]">Entdecken <span class="material-symbols-outlined text-[14px]">chevron_right</span></span></div></a>
+
+  <a class="group relative flex flex-col justify-between p-5 rounded-2xl bg-black/60 hover:bg-[#0e1e1a]/80 border border-success-emerald/30 hover:border-success-emerald/60 shadow-[0_4px_24px_rgba(0,0,0,0.5),0_0_20px_rgba(16,185,129,0.12)] hover:shadow-[0_4px_30px_rgba(0,0,0,0.6),0_0_25px_rgba(16,185,129,0.22)] transition-all duration-300 text-left active:scale-[0.98] backdrop-blur-xl overflow-hidden" href="{{DATA:SCREEN:SCREEN_17}}"><div class="flex items-center justify-between gap-3 mb-4"><div class="w-10 h-10 rounded-xl bg-success-emerald/10 border border-success-emerald/30 flex items-center justify-center transition-all duration-300 group-hover:bg-success-emerald/20 shadow-[0_0_12px_rgba(16,185,129,0.15)]"><span class="material-symbols-outlined text-[20px] text-success-emerald">credit_card</span></div><div class="w-10 h-10 rounded-full bg-white/[0.03] border border-white/10 group-hover:bg-success-emerald group-hover:text-black flex items-center justify-center transition-all duration-300 flex-shrink-0"><span class="material-symbols-outlined text-[20px] text-white/70 group-hover:text-black group-hover:translate-x-0.5 transition-all duration-300">arrow_forward</span></div></div><div class="flex flex-col gap-1.5"><div class="font-headline-lg text-[20px] sm:text-[22px] font-bold text-white group-hover:text-success-emerald transition-colors tracking-tight">Für Mitarbeitende</div><span class="font-label-caps text-[11px] text-white/70 group-hover:text-white/90 tracking-wider uppercase transition-colors flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-success-emerald"></span>100% Free · DailyCheq Card</span></div><div class="mt-4 pt-3 border-t border-white/[0.08] flex items-center justify-between text-success-emerald text-[12px] font-medium"><span class="font-label-caps tracking-wider uppercase text-[11px] text-text-dim group-hover:text-success-emerald transition-colors">Mitarbeiter-App</span><span class="inline-flex items-center gap-1 text-success-emerald group-hover:translate-x-0.5 transition-transform font-semibold text-[12px]">Mehr erfahren <span class="material-symbols-outlined text-[14px]">chevron_right</span></span></div></a>
+</div>
+</div>
+</div>
+</div>
+<!-- Trust Badges Footer Pill -->
+<div class="relative z-10 w-full flex flex-col items-center gap-3 pb-4 pt-8">
+<div class="w-full max-w-2xl flex flex-wrap items-center justify-center sm:justify-around gap-4 sm:gap-6 px-6 py-2.5 rounded-full bg-white/[0.02] backdrop-blur-xl border border-white/10 shadow-[0_4px_24px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.08)] mx-auto"><div class="flex items-center gap-2 text-white/70 hover:text-white transition-colors cursor-default"><span class="material-symbols-outlined text-[15px] text-primary flex-shrink-0">verified_user</span><span class="font-label-caps text-[11px] uppercase tracking-wider font-medium text-white/80">MiCA &amp; EU-konform</span></div><span class="w-1 h-1 rounded-full bg-white/20 hidden sm:inline-block flex-shrink-0"></span><div class="flex items-center gap-2 text-white/70 hover:text-white transition-colors cursor-default"><span class="material-symbols-outlined text-[15px] text-primary flex-shrink-0">account_balance</span><span class="font-label-caps text-[11px] uppercase tracking-wider font-medium text-white/80">BaFin-regulierte Partner</span></div><span class="w-1 h-1 rounded-full bg-white/20 hidden sm:inline-block flex-shrink-0"></span><div class="flex items-center gap-2 text-white/70 hover:text-white transition-colors cursor-default"><span class="material-symbols-outlined text-[15px] text-primary flex-shrink-0">lock</span><span class="font-label-caps text-[11px] uppercase tracking-wider font-medium text-white/80">100% Vorfinanziert</span></div></div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-black/60 backdrop-blur-xl border-t border-white/[0.08] w-full relative z-10"><div class="max-w-7xl mx-auto px-6 sm:px-8 py-12"><div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12"><div class="md:col-span-2 max-w-sm"><div class="flex items-center gap-1.5 mb-4"><span class="text-xl font-bold tracking-tight text-white">DailyCheq</span><span class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_10px_rgba(221,183,255,0.8)]"></span></div><p class="font-body-sm text-[14px] text-text-dim leading-relaxed">Dein Gehalt, wann du es willst. Die neue Freiheit für moderne Teams.</p></div><div class="md:col-span-2 flex flex-wrap gap-16 md:justify-end"><div class="flex flex-col gap-3"><h4 class="font-label-caps text-[12px] text-white uppercase tracking-widest font-semibold mb-1">Rechtliches</h4><a class="font-body-sm text-[14px] text-text-dim hover:text-primary transition-colors" href="#impressum">Impressum</a><a class="font-body-sm text-[14px] text-text-dim hover:text-primary transition-colors" href="#datenschutz">Datenschutz</a><a class="font-body-sm text-[14px] text-text-dim hover:text-primary transition-colors" href="#agb">AGB</a></div><div class="flex flex-col gap-3"><h4 class="font-label-caps text-[12px] text-white uppercase tracking-widest font-semibold mb-1">Unternehmen</h4><a class="font-body-sm text-[14px] text-text-dim hover:text-primary transition-colors" href="#compliance">Compliance</a><a class="font-body-sm text-[14px] text-text-dim hover:text-primary transition-colors" href="#karriere">Karriere</a><a class="font-body-sm text-[14px] text-text-dim hover:text-primary transition-colors" href="#presse">Presse</a></div></div></div><div class="border-t border-white/[0.08] pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left"><p class="font-body-sm text-[12px] text-text-dim">© 2024 DailyCheq GbR. Alle Rechte vorbehalten. ISO 27001 zertifiziert.</p><div class="flex items-center gap-6"><a class="text-text-dim hover:text-primary transition-all duration-200 hover:scale-110" href="#"><span class="material-symbols-outlined text-[20px]">share</span></a><a class="text-text-dim hover:text-primary transition-all duration-200 hover:scale-110" href="#"><span class="material-symbols-outlined text-[20px]">public</span></a></div></div></div></footer>
+
+
+
+
+
+
+</body></html>
